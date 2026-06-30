@@ -796,14 +796,14 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
   const[search,setSearch]=useState("");
   const[sf,setSf]=useState("All");
   const[pf,setPf]=useState("All");
-  const all=[...loads,...JUNE_LOADS];
   const filtered=useMemo(()=>{
+    const all=[...loads,...JUNE_LOADS];
     let l=all.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(sf!=="All")l=l.filter(x=>x.st===sf);
     if(pf!=="All")l=l.filter(x=>x.pay===pf);
     return l.sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0));
-  },[all,search,sf,pf]);
+  },[loads,search,sf,pf]);
   const del=id=>{if(window.confirm("Delete?")){setLoads(l=>l.filter(x=>x.id!==id));toast("Deleted");}};
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
@@ -1135,7 +1135,6 @@ export default function App(){
   }
 
   // Admin / Owner full portal
-  const isAdmin=user.role==="Admin"||user.role==="Owner";
   const NAV=[["dashboard","Home","home"],["june","June 2026","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["reports","Reports","chart"]];
   const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,toast,setModal,user};
   let body;
