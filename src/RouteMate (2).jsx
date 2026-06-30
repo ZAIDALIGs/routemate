@@ -563,7 +563,7 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
     if(sf!=="All")l=l.filter(x=>x.st===sf);
     if(pf!=="All")l=l.filter(x=>x.pay===pf);
     return l.sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0));
-  },[loads,search,sf,pf]);
+  },[all,search,sf,pf]);
   const del=id=>{if(window.confirm("Delete?")){setLoads(l=>l.filter(x=>x.id!==id));toast("Deleted");}};
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
