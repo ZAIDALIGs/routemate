@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { saveData, listenData } from "./firebase";
 
 const C = {
   bg:{d:"#0A0A0F",l:"#F5F5F7"}, surf:{d:"#111118",l:"#FFFFFF"},
@@ -116,6 +117,24 @@ function gid(){return Math.random().toString(36).slice(2,9);}
 function money(n){return"$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fdate(d){if(!d)return"-";try{return new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}catch{return d;}}
 function useLS(key,init){
+  const[v,sv]=useState(init);
+  const[loaded,setLoaded]=useState(false);
+  useEffect(()=>{
+    const unsub=listenData(key,(val)=>{sv(val);setLoaded(true);},init);
+    return ()=>unsub&&unsub();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[key]);
+  const set=useCallback(x=>{
+    sv(p=>{
+      const n=typeof x==="function"?x(p):x;
+      saveData(key,n);
+      return n;
+    });
+  },[key]);
+  return[v,set];
+}
+// Local-only storage (stays on this device/browser only - used for login session and theme)
+function useLocal(key,init){
   const[v,sv]=useState(()=>{try{const s=localStorage.getItem(key);return s?JSON.parse(s):init;}catch{return init;}});
   const set=useCallback(x=>{sv(p=>{const n=typeof x==="function"?x(p):x;try{localStorage.setItem(key,JSON.stringify(n));}catch{}return n;});},[key]);
   return[v,set];
@@ -828,8 +847,8 @@ function LoadModal({data,close,th,employees,drivers,setLoads,toast}){
 }
 
 export default function App(){
-  const[dark,setDark]=useLS("rm2_dark",true);
-  const[user,setUser]=useLS("rm2_user",null);
+  const[dark,setDark]=useLocal("rm2_dark",true);
+  const[user,setUser]=useLocal("rm2_user",null);
   const[page,setPage]=useState("dashboard");
   const[sb,setSb]=useState(false);
   const[loads,setLoads]=useLS("rm2_loads",[]);
