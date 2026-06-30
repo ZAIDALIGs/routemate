@@ -9,64 +9,64 @@ const C = {
 };
 
 const JUNE_LOADS = [
-  {id:"j1",dn:"Dan Garret",bb:"Ali Bhai",bk:"Freight Masters",rc:1000,inv:40,pd:"2026-06-03",pl:"ADDISON, IL",dd:"2026-06-03",dl:"ELKHART, IN",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j2",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:850,inv:34,pd:"2026-06-04",pl:"Fort Wayne, IN",dd:"2026-06-05",dl:"Chicago, IL",st:"Delivered",pay:"Paid",cm:"Zelle"},
-  {id:"j3",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1100,inv:44,pd:"2026-06-08",pl:"Chicago, IL",dd:"2026-06-09",dl:"Fort Wayne, IN",st:"Delivered",pay:"Paid",cm:"Zelle"},
-  {id:"j4",dn:"Dan Garret",bb:"Ali Bhai",bk:"FitzMark",rc:900,inv:36,pd:"2026-06-09",pl:"Fort Wayne, IN",dd:"2026-06-10",dl:"Dwight, IL",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j5",dn:"Dan Garret",bb:"Ali Bhai",bk:"ROAR LOGISTICS",rc:1100,inv:44,pd:"2026-06-10",pl:"Garry, IN",dd:"2026-06-10",dl:"Marion, IN",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j6",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1100,inv:44,pd:"2026-06-11",pl:"Fort Wayne, IN",dd:"2026-06-12",dl:"Decatur, IL",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j7",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1800,inv:72,pd:"2026-06-16",pl:"Harvard, IL",dd:"2026-06-17",dl:"Greenwood, IN",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j8",dn:"Dan Garret",bb:"Ali Bhai",bk:"Fitzmark",rc:1000,inv:40,pd:"2026-06-17",pl:"Plainfield, IN",dd:"2026-06-18",dl:"Mount Pleasant, WI",st:"Delivered",pay:"Paid",cm:"Zelle"},
-  {id:"j9",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1150,inv:46,pd:"2026-06-23",pl:"Romeoville, IL",dd:"2026-06-24",dl:"Greenfield, IN",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j10",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1000,inv:40,pd:"2026-06-24",pl:"Terre Haute, IN",dd:"2026-06-25",dl:"Romeoville, IL",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j11",dn:"Anderson",bb:"Younous",bk:"Landstar",rc:1900,inv:108.30,pd:"2026-06-22",pl:"BESSEMER AL",dd:"2026-06-23",dl:"HOWELL NJ",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j12",dn:"Anderson",bb:"Younous",bk:"Landstar",rc:2500,inv:150,pd:"2026-06-23",pl:"AMELIA CRT HSE VA",dd:"2026-06-25",dl:"S PORTLAND ME",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j13",dn:"Reefer",bb:"Hasnain",bk:"Moeller Logistics",rc:900,inv:45,pd:"2026-06-11",pl:"Decatur, IN",dd:"2026-06-12",dl:"Hanover Park, IL",st:"Delivered",pay:"Paid",cm:"*000177"},
-  {id:"j14",dn:"Okwardi Opara",bb:"Awais",bk:"TQL",rc:2700,inv:189,pd:"2026-06-03",pl:"Tracy, CA",dd:"2026-06-05",dl:"Hereford, TX",st:"Delivered",pay:"Paid",cm:"174"},
-  {id:"j15",dn:"Okwardi Opara",bb:"Awais",bk:"wwex",rc:2050,inv:143.50,pd:"2026-06-02",pl:"LUBBOCK TX",dd:"2026-06-05",dl:"WAKE FOREST NC",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j16",dn:"Okwardi Opara",bb:"Awais",bk:"wwex",rc:1100,inv:77,pd:"2026-06-04",pl:"ABILENE TX",dd:"2026-06-09",dl:"PHILADELPHIA, PA",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j17",dn:"Okwardi Opara",bb:"Awais",bk:"CDS Transport",rc:1950,inv:136.50,pd:"2026-06-09",pl:"WARMINSTER, PA",dd:"2026-06-10",dl:"TULSA, OK",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j18",dn:"Okwardi Opara",bb:"Awais",bk:"S&S Brokerage",rc:1400,inv:98,pd:"2026-06-11",pl:"Cuba, MO",dd:"2026-06-12",dl:"Pulaski, VA",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j19",dn:"Okwardi Opara",bb:"Awais",bk:"Freight Flex",rc:5000,inv:350,pd:"2026-06-14",pl:"N CHARLESTON, SC",dd:"2026-06-16",dl:"ASPEN, CO",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j20",dn:"Okwardi Opara",bb:"Awais",bk:"Baileys logistics",rc:4700,inv:329,pd:"2026-06-17",pl:"Lindon, UT",dd:"2026-06-19",dl:"Atlanta, GA",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j21",dn:"Okwardi Opara",bb:"Awais",bk:"General Transportation",rc:3250,inv:227.50,pd:"2026-06-19",pl:"Perry, GA",dd:"2026-06-22",dl:"Aurora, CO",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j22",dn:"Okwardi Opara",bb:"Awais",bk:"Drove Logistics",rc:3500,inv:245,pd:"2026-06-19",pl:"KENNESAW, GA",dd:"2026-06-23",dl:"HIGHLANDS RANCH, CO",st:"Delivered",pay:"Paid",cm:"inv 000187"},
-  {id:"j23",dn:"Okwardi Opara",bb:"Awais",bk:"integrated connection",rc:1800,inv:126,pd:"2026-06-23",pl:"LOVELAND, CO",dd:"2026-06-24",dl:"CLEBURNE, TX",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j24",dn:"Okwardi Opara",bb:"Awais",bk:"Bedrock logistics",rc:2500,inv:175,pd:"2026-06-24",pl:"LEWISVILLE, TX",dd:"2026-06-25",dl:"CLEVELAND, MS",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j25",dn:"Okwardi Opara",bb:"Awais",bk:"TQL",rc:2100,inv:147,pd:"2026-06-26",pl:"Olive Branch, MS",dd:"2026-06-29",dl:"Pequannock, NJ",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j26",dn:"Raymond",bb:"Sidra",bk:"Premier Global Transp",rc:2850,inv:171,pd:"2026-06-16",pl:"Lexington, KY",dd:"2026-06-17",dl:"Wellesley, MA",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j27",dn:"Jay Miller",bb:"Sidra",bk:"Indelible Logistics",rc:900,inv:54,pd:"2026-06-12",pl:"STANLEY NC",dd:"2026-06-12",dl:"CHARLESTON SC",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j28",dn:"Jimmy",bb:"Ubair",bk:"legion logistics",rc:1500,inv:99.75,pd:"2026-06-05",pl:"RIVERSIDE CA",dd:"2026-06-07",dl:"SCOTTSBLUFF NE",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j29",dn:"Jimmy",bb:"Ubair",bk:"Blackbox logistics",rc:1475,inv:98.09,pd:"2026-06-09",pl:"Colton, CA",dd:"2026-06-10",dl:"Ely, NV",st:"Delivered",pay:"Paid",cm:"174"},
-  {id:"j30",dn:"Brian",bb:"Ubair",bk:"GREEN FREIGHT LOGISTICS",rc:400,inv:32,pd:"2026-06-03",pl:"BALTIMORE MD",dd:"2026-06-04",dl:"STUARTS DRAFT VA",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j31",dn:"Brian",bb:"Ubair",bk:"TQL",rc:1200,inv:96,pd:"2026-06-17",pl:"Cranbury, NJ",dd:"2026-06-18",dl:"Zeeland, MI",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j32",dn:"Harol",bb:"Ubair",bk:"Tailwind",rc:1400,inv:112,pd:"2026-06-03",pl:"ADAIRSVILLE, GA",dd:"2026-06-04",dl:"TERRELL, TX",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j33",dn:"Harol",bb:"Ubair",bk:"Nations Top Logistics",rc:2100,inv:168,pd:"2026-06-19",pl:"Columbus, GA",dd:"2026-06-22",dl:"Shreveport, LA",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j34",dn:"Christon",bb:"Younous",bk:"C&W TRANSPORT",rc:900,inv:60,pd:"2026-06-17",pl:"MINNVILLE TN",dd:"2026-06-18",dl:"EUREKA IL",st:"Delivered",pay:"Paid",cm:""},
-  {id:"j35",dn:"Christon",bb:"Younous",bk:"GlobalTraz",rc:1200,inv:80,pd:"2026-06-17",pl:"New Paris, IN",dd:"2026-06-18",dl:"Columbia, MD",st:"Delivered",pay:"Paid",cm:"174"},
-  {id:"j36",dn:"Christon",bb:"Younous",bk:"steamboat Transp",rc:2500,inv:166,pd:"2026-06-19",pl:"Bensalem, PA",dd:"2026-06-22",dl:"Dallas, TX",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j37",dn:"Christon",bb:"Younous",bk:"Show me global",rc:1100,inv:77,pd:"2026-06-24",pl:"Forney, TX",dd:"2026-06-25",dl:"Kansas City, MO",st:"Picked Up",pay:"Unpaid",cm:""},
-  {id:"j38",dn:"Christon",bb:"Younous",bk:"Central Freight Mgmt",rc:750,inv:53,pd:"2026-06-25",pl:"TOPEKA KS",dd:"2026-06-26",dl:"GARDEN CITY KS",st:"Booked",pay:"Unpaid",cm:"KTM"},
-  {id:"j39",dn:"Cadet",bb:"Zain",bk:"BROKERMAN LOGISTICS",rc:1700,inv:136,pd:"2026-06-01",pl:"Noblesville, IN",dd:"2026-06-02",dl:"PENSACOLA, FL",st:"Delivered",pay:"Paid",cm:"KTM 154,155"},
-  {id:"j40",dn:"Cadet",bb:"Zain",bk:"ATS Logistics",rc:4500,inv:360,pd:"2026-06-05",pl:"REDSTONE CENTRAL, AL",dd:"2026-06-08",dl:"PELHAM, NH",st:"Delivered",pay:"Paid",cm:"KTM 162,163"},
-  {id:"j41",dn:"Cadet",bb:"Zain",bk:"Axle Logistics",rc:4100,inv:155.80,pd:"2026-06-10",pl:"Mountain Top, PA",dd:"2026-06-13",dl:"San Diego, CA",st:"Delivered",pay:"Paid",cm:"Dirmat 174"},
-  {id:"j42",dn:"Cadet",bb:"Zain",bk:"Fitzharris",rc:5000,inv:350,pd:"2026-06-14",pl:"CHULA VISTA, CA",dd:"2026-06-16",dl:"INDIANAPOLIS, IN",st:"Delivered",pay:"Paid",cm:"KTM 175,176"},
-  {id:"j43",dn:"Cadet",bb:"Zain",bk:"Armstrong Transport",rc:3300,inv:231,pd:"2026-06-18",pl:"Fithian, IL",dd:"2026-06-19",dl:"Lincoln, ME",st:"Delivered",pay:"Paid",cm:"KTM 183,184"},
-  {id:"j44",dn:"Rodney",bb:"Yasir Arfat",bk:"",rc:300,inv:18,pd:"2026-06-05",pl:"Cincinnati, OH",dd:"2026-06-06",dl:"Piqua, OH",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j45",dn:"Rodney",bb:"Yasir Arfat",bk:"",rc:350,inv:21,pd:"2026-06-05",pl:"Springfield, OH",dd:"2026-06-06",dl:"St Marys, OH",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j46",dn:"Vernon",bb:"Yasir Arfat",bk:"TQL",rc:1000,inv:50,pd:"2026-06-16",pl:"Aurora, CO",dd:"2026-06-17",dl:"Casper, WY",st:"Delivered",pay:"Paid",cm:"Zelle"},
-  {id:"j47",dn:"Anthony",bb:"Yasir Arfat",bk:"TQL",rc:2500,inv:125,pd:"2026-06-17",pl:"San Diego, CA",dd:"2026-06-19",dl:"Idaho Falls, ID",st:"Delivered",pay:"Paid",cm:"Zelle"},
-  {id:"j48",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:530,inv:42.40,pd:"2026-06-02",pl:"Holiday, FL",dd:"2026-06-02",dl:"Coconut Creek, FL",st:"Delivered",pay:"Paid",cm:"156 5%"},
-  {id:"j49",dn:"Desman Hearns",bb:"Tehseen",bk:"Archer Cargo",rc:175,inv:14,pd:"2026-06-09",pl:"Tampa, FL",dd:"2026-06-09",dl:"Tampa, FL",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j50",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:225,inv:18,pd:"2026-06-03",pl:"Plant City, FL",dd:"2026-06-03",dl:"Sarasota, FL",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j51",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:400,inv:32,pd:"2026-06-22",pl:"Mulberry, FL",dd:"2026-06-22",dl:"Coconut Creek, FL",st:"Delivered",pay:"Unpaid",cm:""},
-  {id:"j52",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:1000,inv:80,pd:"2026-06-24",pl:"Charlotte, NC",dd:"2026-06-25",dl:"Ocala, FL",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j53",dn:"Desman Hearns",bb:"Tehseen",bk:"D&L TRANSPORT",rc:1100,inv:88,pd:"2026-06-25",pl:"GREENVILLE SC",dd:"2026-06-26",dl:"OCALA FL",st:"Booked",pay:"Unpaid",cm:""},
-  {id:"j54",dn:"David-Richard",bb:"Zaid",bk:"Brokerman",rc:1800,inv:126,pd:"2026-06-16",pl:"Libertyville, IL",dd:"2026-06-17",dl:"Reading, PA",st:"Delivered",pay:"Paid",cm:"KTM"},
-  {id:"j55",dn:"David-Richard",bb:"Zaid",bk:"PRADEL LOGISTICS",rc:450,inv:31.50,det:450,pd:"2026-06-18",pl:"Philadelphia PA",dd:"2026-06-19",dl:"Aberdeen, MD",st:"Delivered",pay:"Paid",cm:"KTM #00178"},
-  {id:"j56",dn:"Tyrone",bb:"Zain",bk:"HD Shipping",rc:250,inv:25,pd:"2026-06-17",pl:"Chantilly, VA",dd:"2026-06-17",dl:"Chantilly, VA",st:"Delivered",pay:"Unpaid",cm:"KTM"},
-  {id:"j57",dn:"Tyrone",bb:"Zain",bk:"Global Tranz",rc:300,inv:30,pd:"2026-06-25",pl:"Washington, DC",dd:"2026-06-25",dl:"Springfield, VA",st:"Picked Up",pay:"Unpaid",cm:"KTM"},
-  {id:"j58",dn:"Tod (lowboy)",bb:"Ali Bhai",bk:"Rapid Transport",rc:2500,inv:125,pd:"2026-06-17",pl:"Albany, NY",dd:"2026-06-17",dl:"Braintree, MA",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j1",dn:"Dan Garret",bb:"Ali Bhai",bk:"Freight Masters",rc:1000,inv:40,factor:3,pd:"2026-06-03",pl:"ADDISON, IL",dd:"2026-06-03",dl:"ELKHART, IN",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j2",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:850,inv:34,factor:3,pd:"2026-06-04",pl:"Fort Wayne, IN",dd:"2026-06-05",dl:"Chicago, IL",st:"Delivered",pay:"Paid",cm:"Zelle"},
+  {id:"j3",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1100,inv:44,factor:3,pd:"2026-06-08",pl:"Chicago, IL",dd:"2026-06-09",dl:"Fort Wayne, IN",st:"Delivered",pay:"Paid",cm:"Zelle"},
+  {id:"j4",dn:"Dan Garret",bb:"Ali Bhai",bk:"FitzMark",rc:900,inv:36,factor:3,pd:"2026-06-09",pl:"Fort Wayne, IN",dd:"2026-06-10",dl:"Dwight, IL",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j5",dn:"Dan Garret",bb:"Ali Bhai",bk:"ROAR LOGISTICS",rc:1100,inv:44,factor:3,pd:"2026-06-10",pl:"Garry, IN",dd:"2026-06-10",dl:"Marion, IN",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j6",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1100,inv:44,factor:3,pd:"2026-06-11",pl:"Fort Wayne, IN",dd:"2026-06-12",dl:"Decatur, IL",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j7",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1800,inv:72,factor:3,pd:"2026-06-16",pl:"Harvard, IL",dd:"2026-06-17",dl:"Greenwood, IN",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j8",dn:"Dan Garret",bb:"Ali Bhai",bk:"Fitzmark",rc:1000,inv:40,factor:3,pd:"2026-06-17",pl:"Plainfield, IN",dd:"2026-06-18",dl:"Mount Pleasant, WI",st:"Delivered",pay:"Paid",cm:"Zelle"},
+  {id:"j9",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1150,inv:46,factor:3,pd:"2026-06-23",pl:"Romeoville, IL",dd:"2026-06-24",dl:"Greenfield, IN",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j10",dn:"Dan Garret",bb:"Ali Bhai",bk:"RXO",rc:1000,inv:40,factor:3,pd:"2026-06-24",pl:"Terre Haute, IN",dd:"2026-06-25",dl:"Romeoville, IL",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j11",dn:"Anderson",bb:"Younous",bk:"Landstar",rc:1900,inv:108.30,factor:3,pd:"2026-06-22",pl:"BESSEMER AL",dd:"2026-06-23",dl:"HOWELL NJ",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j12",dn:"Anderson",bb:"Younous",bk:"Landstar",rc:2500,inv:150,factor:3,pd:"2026-06-23",pl:"AMELIA CRT HSE VA",dd:"2026-06-25",dl:"S PORTLAND ME",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j13",dn:"Reefer",bb:"Hasnain",bk:"Moeller Logistics",rc:900,inv:45,factor:3,pd:"2026-06-11",pl:"Decatur, IN",dd:"2026-06-12",dl:"Hanover Park, IL",st:"Delivered",pay:"Paid",cm:"*000177"},
+  {id:"j14",dn:"Okwardi Opara",bb:"Awais",bk:"TQL",rc:2700,inv:189,factor:3,pd:"2026-06-03",pl:"Tracy, CA",dd:"2026-06-05",dl:"Hereford, TX",st:"Delivered",pay:"Paid",cm:"174"},
+  {id:"j15",dn:"Okwardi Opara",bb:"Awais",bk:"wwex",rc:2050,inv:143.50,factor:3,pd:"2026-06-02",pl:"LUBBOCK TX",dd:"2026-06-05",dl:"WAKE FOREST NC",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j16",dn:"Okwardi Opara",bb:"Awais",bk:"wwex",rc:1100,inv:77,factor:3,pd:"2026-06-04",pl:"ABILENE TX",dd:"2026-06-09",dl:"PHILADELPHIA, PA",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j17",dn:"Okwardi Opara",bb:"Awais",bk:"CDS Transport",rc:1950,inv:136.50,factor:3,pd:"2026-06-09",pl:"WARMINSTER, PA",dd:"2026-06-10",dl:"TULSA, OK",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j18",dn:"Okwardi Opara",bb:"Awais",bk:"S&S Brokerage",rc:1400,inv:98,factor:3,pd:"2026-06-11",pl:"Cuba, MO",dd:"2026-06-12",dl:"Pulaski, VA",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j19",dn:"Okwardi Opara",bb:"Awais",bk:"Freight Flex",rc:5000,inv:350,factor:3,pd:"2026-06-14",pl:"N CHARLESTON, SC",dd:"2026-06-16",dl:"ASPEN, CO",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j20",dn:"Okwardi Opara",bb:"Awais",bk:"Baileys logistics",rc:4700,inv:329,factor:3,pd:"2026-06-17",pl:"Lindon, UT",dd:"2026-06-19",dl:"Atlanta, GA",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j21",dn:"Okwardi Opara",bb:"Awais",bk:"General Transportation",rc:3250,inv:227.50,factor:3,pd:"2026-06-19",pl:"Perry, GA",dd:"2026-06-22",dl:"Aurora, CO",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j22",dn:"Okwardi Opara",bb:"Awais",bk:"Drove Logistics",rc:3500,inv:245,factor:3,pd:"2026-06-19",pl:"KENNESAW, GA",dd:"2026-06-23",dl:"HIGHLANDS RANCH, CO",st:"Delivered",pay:"Paid",cm:"inv 000187"},
+  {id:"j23",dn:"Okwardi Opara",bb:"Awais",bk:"integrated connection",rc:1800,inv:126,factor:3,pd:"2026-06-23",pl:"LOVELAND, CO",dd:"2026-06-24",dl:"CLEBURNE, TX",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j24",dn:"Okwardi Opara",bb:"Awais",bk:"Bedrock logistics",rc:2500,inv:175,factor:3,pd:"2026-06-24",pl:"LEWISVILLE, TX",dd:"2026-06-25",dl:"CLEVELAND, MS",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j25",dn:"Okwardi Opara",bb:"Awais",bk:"TQL",rc:2100,inv:147,factor:3,pd:"2026-06-26",pl:"Olive Branch, MS",dd:"2026-06-29",dl:"Pequannock, NJ",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j26",dn:"Raymond",bb:"Sidra",bk:"Premier Global Transp",rc:2850,inv:171,factor:3,pd:"2026-06-16",pl:"Lexington, KY",dd:"2026-06-17",dl:"Wellesley, MA",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j27",dn:"Jay Miller",bb:"Sidra",bk:"Indelible Logistics",rc:900,inv:54,factor:3,pd:"2026-06-12",pl:"STANLEY NC",dd:"2026-06-12",dl:"CHARLESTON SC",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j28",dn:"Jimmy",bb:"Ubair",bk:"legion logistics",rc:1500,inv:99.75,factor:3,pd:"2026-06-05",pl:"RIVERSIDE CA",dd:"2026-06-07",dl:"SCOTTSBLUFF NE",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j29",dn:"Jimmy",bb:"Ubair",bk:"Blackbox logistics",rc:1475,inv:98.09,factor:3,pd:"2026-06-09",pl:"Colton, CA",dd:"2026-06-10",dl:"Ely, NV",st:"Delivered",pay:"Paid",cm:"174"},
+  {id:"j30",dn:"Brian",bb:"Ubair",bk:"GREEN FREIGHT LOGISTICS",rc:400,inv:32,factor:3,pd:"2026-06-03",pl:"BALTIMORE MD",dd:"2026-06-04",dl:"STUARTS DRAFT VA",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j31",dn:"Brian",bb:"Ubair",bk:"TQL",rc:1200,inv:96,factor:3,pd:"2026-06-17",pl:"Cranbury, NJ",dd:"2026-06-18",dl:"Zeeland, MI",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j32",dn:"Harol",bb:"Ubair",bk:"Tailwind",rc:1400,inv:112,factor:3,pd:"2026-06-03",pl:"ADAIRSVILLE, GA",dd:"2026-06-04",dl:"TERRELL, TX",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j33",dn:"Harol",bb:"Ubair",bk:"Nations Top Logistics",rc:2100,inv:168,factor:3,pd:"2026-06-19",pl:"Columbus, GA",dd:"2026-06-22",dl:"Shreveport, LA",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j34",dn:"Christon",bb:"Younous",bk:"C&W TRANSPORT",rc:900,inv:60,factor:3,pd:"2026-06-17",pl:"MINNVILLE TN",dd:"2026-06-18",dl:"EUREKA IL",st:"Delivered",pay:"Paid",cm:""},
+  {id:"j35",dn:"Christon",bb:"Younous",bk:"GlobalTraz",rc:1200,inv:80,factor:3,pd:"2026-06-17",pl:"New Paris, IN",dd:"2026-06-18",dl:"Columbia, MD",st:"Delivered",pay:"Paid",cm:"174"},
+  {id:"j36",dn:"Christon",bb:"Younous",bk:"steamboat Transp",rc:2500,inv:166,factor:3,pd:"2026-06-19",pl:"Bensalem, PA",dd:"2026-06-22",dl:"Dallas, TX",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j37",dn:"Christon",bb:"Younous",bk:"Show me global",rc:1100,inv:77,factor:3,pd:"2026-06-24",pl:"Forney, TX",dd:"2026-06-25",dl:"Kansas City, MO",st:"Picked Up",pay:"Unpaid",cm:""},
+  {id:"j38",dn:"Christon",bb:"Younous",bk:"Central Freight Mgmt",rc:750,inv:53,factor:3,pd:"2026-06-25",pl:"TOPEKA KS",dd:"2026-06-26",dl:"GARDEN CITY KS",st:"Booked",pay:"Unpaid",cm:"KTM"},
+  {id:"j39",dn:"Cadet",bb:"Zain",bk:"BROKERMAN LOGISTICS",rc:1700,inv:136,factor:3,pd:"2026-06-01",pl:"Noblesville, IN",dd:"2026-06-02",dl:"PENSACOLA, FL",st:"Delivered",pay:"Paid",cm:"KTM 154,155"},
+  {id:"j40",dn:"Cadet",bb:"Zain",bk:"ATS Logistics",rc:4500,inv:360,factor:3,pd:"2026-06-05",pl:"REDSTONE CENTRAL, AL",dd:"2026-06-08",dl:"PELHAM, NH",st:"Delivered",pay:"Paid",cm:"KTM 162,163"},
+  {id:"j41",dn:"Cadet",bb:"Zain",bk:"Axle Logistics",rc:4100,inv:155.80,factor:3,pd:"2026-06-10",pl:"Mountain Top, PA",dd:"2026-06-13",dl:"San Diego, CA",st:"Delivered",pay:"Paid",cm:"Dirmat 174"},
+  {id:"j42",dn:"Cadet",bb:"Zain",bk:"Fitzharris",rc:5000,inv:350,factor:3,pd:"2026-06-14",pl:"CHULA VISTA, CA",dd:"2026-06-16",dl:"INDIANAPOLIS, IN",st:"Delivered",pay:"Paid",cm:"KTM 175,176"},
+  {id:"j43",dn:"Cadet",bb:"Zain",bk:"Armstrong Transport",rc:3300,inv:231,factor:3,pd:"2026-06-18",pl:"Fithian, IL",dd:"2026-06-19",dl:"Lincoln, ME",st:"Delivered",pay:"Paid",cm:"KTM 183,184"},
+  {id:"j44",dn:"Rodney",bb:"Yasir Arfat",bk:"",rc:300,inv:18,factor:3,pd:"2026-06-05",pl:"Cincinnati, OH",dd:"2026-06-06",dl:"Piqua, OH",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j45",dn:"Rodney",bb:"Yasir Arfat",bk:"",rc:350,inv:21,factor:3,pd:"2026-06-05",pl:"Springfield, OH",dd:"2026-06-06",dl:"St Marys, OH",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j46",dn:"Vernon",bb:"Yasir Arfat",bk:"TQL",rc:1000,inv:50,factor:3,pd:"2026-06-16",pl:"Aurora, CO",dd:"2026-06-17",dl:"Casper, WY",st:"Delivered",pay:"Paid",cm:"Zelle"},
+  {id:"j47",dn:"Anthony",bb:"Yasir Arfat",bk:"TQL",rc:2500,inv:125,factor:3,pd:"2026-06-17",pl:"San Diego, CA",dd:"2026-06-19",dl:"Idaho Falls, ID",st:"Delivered",pay:"Paid",cm:"Zelle"},
+  {id:"j48",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:530,inv:42.40,factor:3,pd:"2026-06-02",pl:"Holiday, FL",dd:"2026-06-02",dl:"Coconut Creek, FL",st:"Delivered",pay:"Paid",cm:"156 5%"},
+  {id:"j49",dn:"Desman Hearns",bb:"Tehseen",bk:"Archer Cargo",rc:175,inv:14,factor:3,pd:"2026-06-09",pl:"Tampa, FL",dd:"2026-06-09",dl:"Tampa, FL",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j50",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:225,inv:18,factor:3,pd:"2026-06-03",pl:"Plant City, FL",dd:"2026-06-03",dl:"Sarasota, FL",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j51",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:400,inv:32,factor:3,pd:"2026-06-22",pl:"Mulberry, FL",dd:"2026-06-22",dl:"Coconut Creek, FL",st:"Delivered",pay:"Unpaid",cm:""},
+  {id:"j52",dn:"Desman Hearns",bb:"Tehseen",bk:"TQL",rc:1000,inv:80,factor:3,pd:"2026-06-24",pl:"Charlotte, NC",dd:"2026-06-25",dl:"Ocala, FL",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j53",dn:"Desman Hearns",bb:"Tehseen",bk:"D&L TRANSPORT",rc:1100,inv:88,factor:3,pd:"2026-06-25",pl:"GREENVILLE SC",dd:"2026-06-26",dl:"OCALA FL",st:"Booked",pay:"Unpaid",cm:""},
+  {id:"j54",dn:"David-Richard",bb:"Zaid",bk:"Brokerman",rc:1800,inv:126,factor:3,pd:"2026-06-16",pl:"Libertyville, IL",dd:"2026-06-17",dl:"Reading, PA",st:"Delivered",pay:"Paid",cm:"KTM"},
+  {id:"j55",dn:"David-Richard",bb:"Zaid",bk:"PRADEL LOGISTICS",rc:450,inv:31.50,factor:3,pd:"2026-06-18",pl:"Philadelphia PA",dd:"2026-06-19",dl:"Aberdeen, MD",st:"Delivered",pay:"Paid",cm:"KTM #00178"},
+  {id:"j56",dn:"Tyrone",bb:"Zain",bk:"HD Shipping",rc:250,inv:25,factor:3,pd:"2026-06-17",pl:"Chantilly, VA",dd:"2026-06-17",dl:"Chantilly, VA",st:"Delivered",pay:"Unpaid",cm:"KTM"},
+  {id:"j57",dn:"Tyrone",bb:"Zain",bk:"Global Tranz",rc:300,inv:30,factor:3,pd:"2026-06-25",pl:"Washington, DC",dd:"2026-06-25",dl:"Springfield, VA",st:"Picked Up",pay:"Unpaid",cm:"KTM"},
+  {id:"j58",dn:"Tod (lowboy)",bb:"Ali Bhai",bk:"Rapid Transport",rc:2500,inv:125,factor:3,pd:"2026-06-17",pl:"Albany, NY",dd:"2026-06-17",dl:"Braintree, MA",st:"Delivered",pay:"Unpaid",cm:""},
 ];
 
 const DEFAULT_DRIVERS = [
@@ -95,27 +95,61 @@ const DEFAULT_DRIVERS = [
   {name:"Larron",rate:10,note:"10% or 9% lease"},
 ];
 
+// threshold: if assigned, employee earns basePct below $thresholdAmt, bonusPct above
 const DEFAULT_EMPLOYEES = [
-  {id:"e1",name:"Ali Bhai",role:"Dispatcher",pct:40},
-  {id:"e2",name:"Raza",role:"Dispatcher",pct:25},
-  {id:"e3",name:"Awais",role:"Dispatcher",pct:35},
-  {id:"e4",name:"Rafay",role:"Dispatcher",pct:20},
-  {id:"e5",name:"Younous",role:"Dispatcher",pct:25},
-  {id:"e6",name:"Ubair",role:"Dispatcher",pct:25},
-  {id:"e7",name:"Huzaifa",role:"Dispatcher",pct:15},
-  {id:"e8",name:"Zain",role:"Dispatcher",pct:35},
-  {id:"e9",name:"Kashif",role:"Dispatcher",pct:5},
-  {id:"e10",name:"Yasir Arfat",role:"Dispatcher",pct:40},
-  {id:"e11",name:"Tehseen",role:"Dispatcher",pct:8},
-  {id:"e12",name:"Sidra",role:"Dispatcher",pct:10},
-  {id:"e13",name:"Zaid",role:"Dispatcher",pct:10},
-  {id:"e14",name:"Hasnain",role:"Dispatcher",pct:10},
+  {id:"e1",name:"Ali Bhai",role:"Dispatcher",pct:40,pass:"alibhai123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:40,bonusPct:45},
+  {id:"e2",name:"Raza",role:"Owner",pct:0,pass:"raza123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:0,bonusPct:0},
+  {id:"e3",name:"Awais",role:"Dispatcher",pct:35,pass:"awais123",assignedDrivers:["Okwardi Opara"],threshold:false,thresholdAmt:1000,basePct:35,bonusPct:40},
+  {id:"e4",name:"Rafay",role:"Dispatcher",pct:20,pass:"rafay123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:20,bonusPct:25},
+  {id:"e5",name:"Younous",role:"Dispatcher",pct:25,pass:"younous123",assignedDrivers:["Anderson","Christon"],threshold:false,thresholdAmt:1000,basePct:25,bonusPct:30},
+  {id:"e6",name:"Ubair",role:"Dispatcher",pct:25,pass:"ubair123",assignedDrivers:["Jimmy","Brian","Harol"],threshold:false,thresholdAmt:1000,basePct:25,bonusPct:30},
+  {id:"e7",name:"Huzaifa",role:"Dispatcher",pct:15,pass:"huzaifa123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:15,bonusPct:20},
+  {id:"e8",name:"Zain",role:"Dispatcher",pct:35,pass:"zain123",assignedDrivers:["Cadet","Tyrone"],threshold:false,thresholdAmt:1000,basePct:35,bonusPct:40},
+  {id:"e9",name:"Kashif",role:"Dispatcher",pct:5,pass:"kashif123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:5,bonusPct:10},
+  {id:"e10",name:"Yasir Arfat",role:"Dispatcher",pct:40,pass:"yasir123",assignedDrivers:["Rodney","Vernon","Anthony"],threshold:false,thresholdAmt:1000,basePct:40,bonusPct:45},
+  {id:"e11",name:"Tehseen",role:"Dispatcher",pct:8,pass:"tehseen123",assignedDrivers:["Desman Hearns"],threshold:false,thresholdAmt:1000,basePct:8,bonusPct:13},
+  {id:"e12",name:"Sidra",role:"Dispatcher",pct:10,pass:"sidra123",assignedDrivers:["Raymond","Jay Miller"],threshold:false,thresholdAmt:1000,basePct:10,bonusPct:15},
+  {id:"e13",name:"Zaid",role:"Owner",pct:0,pass:"zaid123",assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:0,bonusPct:0},
+  {id:"e14",name:"Hasnain",role:"Dispatcher",pct:10,pass:"hasnain123",assignedDrivers:["Reefer"],threshold:false,thresholdAmt:1000,basePct:10,bonusPct:15},
+];
+
+const ADMIN_USERS = [
+  {email:"admin@routemate.com",password:"Admin@2026",name:"Admin",role:"Admin"},
+  {email:"raza@routemate.com",password:"Raza@2026",name:"Raza",role:"Owner"},
+  {email:"zaid@routemate.com",password:"Zaid@2026",name:"Zaid",role:"Owner"},
 ];
 
 const STATUSES=["Pending","In Transit","Delivered","Invoiced","Booked","Picked Up","Cancelled"];
 function gid(){return Math.random().toString(36).slice(2,9);}
 function money(n){return"$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fdate(d){if(!d)return"-";try{return new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}catch{return d;}}
+function netInv(load){const f=parseFloat(load.factor)||3;return (parseFloat(load.inv)||0)*(1-f/100);}
+
+// Commission calc with threshold rule
+function calcCommission(emp,paidLoads){
+  if(!emp||emp.role==="Owner")return 0;
+  const myLoads=paidLoads.filter(l=>l.bb&&l.bb.toLowerCase().includes(emp.name.toLowerCase()));
+  if(!emp.threshold){
+    return myLoads.reduce((s,l)=>s+netInv(l)*(emp.pct/100),0);
+  }
+  // Threshold rule: basePct up to thresholdAmt, bonusPct above
+  let running=0,total=0;
+  myLoads.forEach(l=>{
+    const net=netInv(l);
+    if(running>=emp.thresholdAmt){
+      total+=net*(emp.bonusPct/100);
+    } else if(running+net<=emp.thresholdAmt){
+      total+=net*(emp.basePct/100);
+    } else {
+      const below=emp.thresholdAmt-running;
+      const above=net-below;
+      total+=below*(emp.basePct/100)+above*(emp.bonusPct/100);
+    }
+    running+=net;
+  });
+  return total;
+}
+
 function useLS(key,init){
   const[v,sv]=useState(init);
   useEffect(()=>{
@@ -132,7 +166,6 @@ function useLS(key,init){
   },[key]);
   return[v,set];
 }
-// Local-only storage (stays on this device/browser only - used for login session and theme)
 function useLocal(key,init){
   const[v,sv]=useState(()=>{try{const s=localStorage.getItem(key);return s?JSON.parse(s):init;}catch{return init;}});
   const set=useCallback(x=>{sv(p=>{const n=typeof x==="function"?x(p):x;try{localStorage.setItem(key,JSON.stringify(n));}catch{}return n;});},[key]);
@@ -162,19 +195,21 @@ function Icon({name,size=20,color="currentColor"}){
   if(name==="logout")return <svg {...p}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>;
   if(name==="pay")return <svg {...p}><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>;
   if(name==="cal")return <svg {...p}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>;
+  if(name==="lock")return <svg {...p}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>;
+  if(name==="bolt")return <svg {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
   return null;
 }
 
 function Badge({color,children}){
-  const m={green:["#1C3A28","#34C759"],red:["#3A1C1C","#FF3B30"],yellow:["#3A2E1C","#FF9500"],blue:["#1C2A3A","#4F6EF7"],purple:["#2A1C3A","#AF52DE"],cyan:["#0C2A3A","#0EA5E9"],gray:["#2A2A3A","#8E8E99"]};
-  const [bg,t]=m[color]||m.gray;
+  const m={green:["#1C3A28","#34C759"],red:["#3A1C1C","#FF3B30"],yellow:["#3A2E1C","#FF9500"],blue:["#1C2A3A","#4F6EF7"],purple:["#2A1C3A","#AF52DE"],cyan:["#0C2A3A","#0EA5E9"],gray:["#2A2A3A","#8E8E99"],orange:["#3A2210","#FF6B00"]};
+  const[bg,t]=m[color]||m.gray;
   return <span style={{background:bg,color:t,padding:"2px 9px",borderRadius:20,fontSize:11,fontWeight:600,display:"inline-block"}}>{children}</span>;
 }
-function statusColor(s){return {Paid:"green",Delivered:"purple","In Transit":"blue",Booked:"cyan","Picked Up":"blue",Unpaid:"yellow",Pending:"yellow",Cancelled:"red"}[s]||"gray";}
+function statusColor(s){return{Paid:"green",Delivered:"purple","In Transit":"blue",Booked:"cyan","Picked Up":"blue",Unpaid:"yellow",Pending:"yellow",Cancelled:"red"}[s]||"gray";}
 
 function Stat({label,value,sub,color,icon,th}){
   const col=color||C.accent;
-  return (
+  return(
     <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:"16px 18px"}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
         <span style={{fontSize:11,color:th.muted,fontWeight:500}}>{label}</span>
@@ -186,18 +221,22 @@ function Stat({label,value,sub,color,icon,th}){
   );
 }
 
-function Login({th,onLogin}){
-  const[em,setEm]=useState("owner@routemate.com");
-  const[pw,setPw]=useState("password");
+//  LOGIN 
+function Login({th,onLogin,employees}){
+  const[em,setEm]=useState("");
+  const[pw,setPw]=useState("");
   const[err,setErr]=useState("");
   const go=()=>{
-    const U=[["owner@routemate.com","Ali Bhai","Owner"],["dispatcher@routemate.com","Raza","Dispatcher"],["viewer@routemate.com","Viewer","Viewer"]];
-    const f=U.find(u=>u[0]===em);
-    if(f&&pw==="password"){onLogin({email:f[0],name:f[1],role:f[2]});setErr("");}
-    else setErr("Invalid credentials");
+    // Check admin users first
+    const admin=ADMIN_USERS.find(u=>u.email===em&&u.password===pw);
+    if(admin){onLogin(admin);return;}
+    // Check employee logins by name (case-insensitive) and password
+    const emp=employees.find(e=>e.name.toLowerCase()===em.toLowerCase()&&e.pass===pw);
+    if(emp){onLogin({email:em,name:emp.name,role:emp.role==="Owner"?"Owner":"Employee",empId:emp.id});return;}
+    setErr("Invalid credentials");
   };
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:12,padding:"13px 15px",fontSize:15,width:"100%",marginBottom:10};
-  return (
+  return(
     <div style={{minHeight:"100vh",background:th.bg,display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
       <div style={{width:"100%",maxWidth:380,background:th.surf,borderRadius:20,padding:36,border:"1px solid "+th.bd}}>
         <div style={{textAlign:"center",marginBottom:28}}>
@@ -205,37 +244,185 @@ function Login({th,onLogin}){
           <div style={{fontSize:22,fontWeight:700}}>RouteMate</div>
           <div style={{fontSize:13,color:th.muted,marginTop:3}}>Dispatch Manager</div>
         </div>
-        <input style={inp} type="email" placeholder="Email" value={em} onChange={e=>setEm(e.target.value)}/>
+        <input style={inp} type="text" placeholder="Email or Name" value={em} onChange={e=>setEm(e.target.value)}/>
         <input style={inp} type="password" placeholder="Password" value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&go()}/>
         {err&&<div style={{color:C.red,fontSize:12,marginBottom:8}}>{err}</div>}
         <button onClick={go} style={{width:"100%",background:C.accent,color:"#fff",border:"none",borderRadius:12,padding:"13px",fontSize:15,fontWeight:600,cursor:"pointer",marginBottom:16}}>Sign In</button>
-        <div style={{fontSize:11,color:th.muted,textAlign:"center"}}>owner@routemate.com / password</div>
+        <div style={{fontSize:11,color:th.muted,textAlign:"center"}}>Admin: admin@routemate.com / Admin@2026</div>
       </div>
     </div>
   );
 }
 
-function Dashboard({th,loads,setPage}){
-  const all=loads.concat(JUNE_LOADS);
-  const paid=all.filter(l=>l.pay==="Paid");
-  const unpaid=all.filter(l=>l.pay!=="Paid");
-  const tRev=all.reduce((s,l)=>s+(l.inv||0),0);
-  const pRev=paid.reduce((s,l)=>s+(l.inv||0),0);
-  const uRev=unpaid.reduce((s,l)=>s+(l.inv||0),0);
-  const jPaid=JUNE_LOADS.filter(l=>l.pay==="Paid").reduce((s,l)=>s+(l.inv||0),0);
-  const jUnp=JUNE_LOADS.filter(l=>l.pay==="Unpaid").reduce((s,l)=>s+(l.inv||0),0);
-  const recent=all.slice().sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0)).slice(0,6);
-  return (
+//  EMPLOYEE PORTAL (restricted view) 
+function EmployeePortal({th,user,employees,drivers,loads,setLoads,toast}){
+  const emp=employees.find(e=>e.id===user.empId);
+  const[page,setPage]=useState("myloads");
+  const[modal,setModal]=useState(null);
+  if(!emp)return <div style={{padding:40,color:th.muted}}>Employee not found.</div>;
+
+  const myDriverNames=emp.assignedDrivers||[];
+  const allLoads=[...loads,...JUNE_LOADS];
+  const myLoads=allLoads.filter(l=>myDriverNames.includes(l.dn)||l.bb===emp.name);
+  const paidMyLoads=myLoads.filter(l=>l.pay==="Paid");
+  const myComm=calcCommission(emp,paidMyLoads);
+
+  const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 12px",fontSize:13};
+
+  return(
+    <div style={{minHeight:"100vh",background:th.bg,color:th.text,fontFamily:"-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif"}}>
+      <header style={{background:th.surf,borderBottom:"1px solid "+th.bd,padding:"12px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:50}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <div style={{width:32,height:32,borderRadius:9,background:"linear-gradient(135deg,#4F6EF7,#7C3AED)",display:"flex",alignItems:"center",justifyContent:"center"}}><Icon name="truck" size={14} color="#fff"/></div>
+          <div><div style={{fontWeight:700,fontSize:14}}>RouteMate</div><div style={{fontSize:10,color:th.muted}}>{emp.name} - Dispatcher</div></div>
+        </div>
+        <div style={{display:"flex",gap:8,alignItems:"center"}}>
+          <div style={{background:C.green+"22",color:C.green,padding:"4px 12px",borderRadius:20,fontSize:12,fontWeight:700}}>Commission: {money(myComm)}</div>
+        </div>
+      </header>
+      <div style={{padding:"16px 14px",maxWidth:900,margin:"0 auto"}}>
+        <div style={{display:"flex",gap:8,marginBottom:16}}>
+          {[["myloads","My Loads","box"],["mydrivers","My Drivers","truck"]].map(t=>(
+            <button key={t[0]} onClick={()=>setPage(t[0])} style={{padding:"8px 16px",border:"none",borderRadius:9,cursor:"pointer",fontSize:13,fontWeight:600,background:page===t[0]?C.accent:th.s2,color:page===t[0]?"#fff":th.muted,display:"flex",alignItems:"center",gap:6}}>
+              <Icon name={t[2]} size={14} color={page===t[0]?"#fff":th.muted}/>{t[1]}
+            </button>
+          ))}
+          <button onClick={()=>setModal({type:"load"})} style={{marginLeft:"auto",background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:13,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:6}}>
+            <Icon name="plus" size={14} color="#fff"/>Add Load
+          </button>
+        </div>
+
+        {page==="myloads"&&(
+          <div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
+              <Stat th={th} label="My Loads" value={myLoads.length} color={C.accent} icon="box"/>
+              <Stat th={th} label="Paid Loads" value={paidMyLoads.length} color={C.green} icon="check"/>
+              <Stat th={th} label="My Commission" value={money(myComm)} color={C.green} icon="dollar"/>
+              {emp.threshold&&<Stat th={th} label="Threshold" value={money(emp.thresholdAmt)} color={C.yellow} icon="bolt" sub={emp.basePct+"% / "+emp.bonusPct+"%"}/>}
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:9}}>
+              {myLoads.length===0?<div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:"40px 20px",textAlign:"center",color:th.muted}}>No loads yet.</div>:
+              myLoads.map(l=>{
+                const isJ=l.id.charAt(0)==="j";
+                return(
+                  <div key={l.id} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:13,padding:"14px 16px"}}>
+                    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
+                      <div>
+                        <div style={{display:"flex",alignItems:"center",gap:7,flexWrap:"wrap",marginBottom:4}}>
+                          <span style={{fontWeight:700,fontSize:13}}>{l.dn}</span>
+                          <Badge color={statusColor(l.st)}>{l.st}</Badge>
+                          <Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge>
+                        </div>
+                        <div style={{fontSize:11,color:th.muted}}>{l.bk||"-"} | {l.pl} - {fdate(l.pd)}</div>
+                      </div>
+                      <div style={{textAlign:"right"}}>
+                        <div style={{fontWeight:700,color:C.green}}>{money(netInv(l))}</div>
+                        <div style={{fontSize:10,color:th.muted}}>after {l.factor||3}% fee</div>
+                      </div>
+                    </div>
+                    {!isJ&&(
+                      <div style={{display:"flex",gap:7}}>
+                        <select value={l.st} onChange={e=>setLoads(ls=>ls.map(x=>x.id===l.id?{...x,st:e.target.value}:x))} style={{...inp,fontSize:11,padding:"5px 9px"}}>
+                          {STATUSES.map(s=><option key={s}>{s}</option>)}
+                        </select>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {page==="mydrivers"&&(
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:11}}>
+            {myDriverNames.length===0?<div style={{color:th.muted,padding:20}}>No drivers assigned yet.</div>:
+            myDriverNames.map(dn=>{
+              const dLoads=myLoads.filter(l=>l.dn===dn);
+              return(
+                <div key={dn} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:16}}>
+                  <div style={{fontWeight:700,fontSize:14,marginBottom:10}}>{dn}</div>
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
+                    <div><div style={{fontSize:9,color:th.muted}}>Loads</div><div style={{fontWeight:700}}>{dLoads.length}</div></div>
+                    <div><div style={{fontSize:9,color:th.muted}}>Paid</div><div style={{fontWeight:700,color:C.green}}>{dLoads.filter(l=>l.pay==="Paid").length}</div></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {modal&&modal.type==="load"&&(
+        <EmpLoadModal emp={emp} drivers={drivers} employees={employees} th={th} close={()=>setModal(null)} setLoads={setLoads} toast={toast} inp={inp}/>
+      )}
+    </div>
+  );
+}
+
+function EmpLoadModal({emp,drivers,employees,th,close,setLoads,toast,inp}){
+  const myDrvs=emp.assignedDrivers||[];
+  const[f,setF]=useState({dn:myDrvs[0]||"",bk:"",rc:"",inv:"",factor:"3",pd:new Date().toISOString().slice(0,10),pl:"",dd:"",dl:"",st:"Booked",pay:"Unpaid",cm:""});
+  const set=k=>e=>setF(p=>({...p,[k]:e.target.value}));
+  const save=()=>{
+    if(!f.dn||!f.inv){window.alert("Driver & Invoice required");return;}
+    setLoads(l=>[{...f,id:gid(),bb:emp.name,rc:parseFloat(f.rc)||0,inv:parseFloat(f.inv)||0,factor:parseFloat(f.factor)||3},...l]);
+    toast("Load added");close();
+  };
+  const lb=t=><label style={{fontSize:10,color:th.muted,fontWeight:500,display:"block",marginBottom:3}}>{t}</label>;
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.75)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:14}} onClick={e=>e.target===e.currentTarget&&close()}>
+      <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:18,padding:22,width:"100%",maxWidth:480,maxHeight:"92vh",overflowY:"auto"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+          <div style={{fontWeight:700,fontSize:16}}>Add Load</div>
+          <button onClick={close} style={{background:"none",border:"none",cursor:"pointer"}}><Icon name="close" size={19} color={th.muted}/></button>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 11px"}}>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Driver *")}<select style={inp} value={f.dn} onChange={set("dn")}><option value="">Select</option>{myDrvs.map(d=><option key={d}>{d}</option>)}</select></div>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Broker")}<input style={inp} placeholder="Broker name" value={f.bk} onChange={set("bk")}/></div>
+          <div>{lb("RC Amount ($)")}<input style={inp} type="number" value={f.rc} onChange={set("rc")}/></div>
+          <div>{lb("Invoice Amount ($) *")}<input style={inp} type="number" value={f.inv} onChange={set("inv")}/></div>
+          <div>{lb("Payment Fee %")}<input style={inp} type="number" value={f.factor} onChange={set("factor")} placeholder="3"/></div>
+          <div>{lb("Status")}<select style={inp} value={f.st} onChange={set("st")}>{STATUSES.map(s=><option key={s}>{s}</option>)}</select></div>
+          <div>{lb("Pickup Date")}<input style={inp} type="date" value={f.pd} onChange={set("pd")}/></div>
+          <div>{lb("Delivery Date")}<input style={inp} type="date" value={f.dd} onChange={set("dd")}/></div>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Pickup Location")}<input style={inp} placeholder="City, State" value={f.pl} onChange={set("pl")}/></div>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Delivery Location")}<input style={inp} placeholder="City, State" value={f.dl} onChange={set("dl")}/></div>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Comments")}<textarea style={{...inp,height:64,resize:"vertical"}} value={f.cm} onChange={set("cm")}/></div>
+        </div>
+        <div style={{display:"flex",gap:9,marginTop:4}}>
+          <button onClick={save} style={{flex:1,background:C.accent,color:"#fff",border:"none",borderRadius:11,padding:"12px",fontSize:14,fontWeight:600,cursor:"pointer"}}>Add Load</button>
+          <button onClick={close} style={{background:th.s2,color:th.text,border:"1px solid "+th.bd,borderRadius:11,padding:"12px 16px",fontSize:14,cursor:"pointer"}}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+//  ADMIN DASHBOARD 
+function Dashboard({th,loads,employees,setPage}){
+  const allLoads=[...loads,...JUNE_LOADS];
+  const paidLoads=allLoads.filter(l=>l.pay==="Paid");
+  const unpaidLoads=allLoads.filter(l=>l.pay==="Unpaid");
+  const totalInv=allLoads.reduce((s,l)=>s+(parseFloat(l.inv)||0),0);
+  const paidInv=paidLoads.reduce((s,l)=>s+(parseFloat(l.inv)||0),0);
+  const totalNetPaid=paidLoads.reduce((s,l)=>s+netInv(l),0);
+  const totalEmpComm=employees.filter(e=>e.role!=="Owner").reduce((s,e)=>s+calcCommission(e,paidLoads),0);
+  const ownerProfit=totalNetPaid-totalEmpComm;
+  const razaShare=ownerProfit/2;
+  const zaidShare=ownerProfit/2;
+  const recent=allLoads.slice().sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0)).slice(0,6);
+  return(
     <div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(148px,1fr))",gap:10,marginBottom:18}}>
-        <Stat th={th} label="Total Revenue" value={money(tRev)} icon="dollar" color={C.accent}/>
-        <Stat th={th} label="97% Revenue" value={money(tRev*0.97)} icon="chart" color={C.purple} sub="After 3% fee"/>
-        <Stat th={th} label="Paid Revenue" value={money(pRev)} icon="check" color={C.green}/>
-        <Stat th={th} label="Unpaid Revenue" value={money(uRev)} icon="dollar" color={C.yellow}/>
-        <Stat th={th} label="June Paid Comm" value={money(jPaid)} icon="cal" color={C.cyan}/>
-        <Stat th={th} label="June Pending" value={money(jUnp)} icon="cal" color={C.yellow}/>
-        <Stat th={th} label="Paid Loads" value={paid.length} icon="check" color={C.green}/>
-        <Stat th={th} label="Unpaid Loads" value={unpaid.length} icon="box" color={C.yellow}/>
+        <Stat th={th} label="Total Invoice" value={money(totalInv)} icon="dollar" color={C.accent}/>
+        <Stat th={th} label="Paid Invoice" value={money(paidInv)} icon="check" color={C.green}/>
+        <Stat th={th} label="Net (after fees)" value={money(totalNetPaid)} icon="dollar" color={C.cyan} sub="After payment fees"/>
+        <Stat th={th} label="Employee Comm" value={money(totalEmpComm)} icon="users" color={C.yellow}/>
+        <Stat th={th} label="Owner Profit" value={money(ownerProfit)} icon="dollar" color={C.green}/>
+        <Stat th={th} label="Raza Share (50%)" value={money(razaShare)} icon="dollar" color={C.purple}/>
+        <Stat th={th} label="Zaid Share (50%)" value={money(zaidShare)} icon="dollar" color={C.purple}/>
+        <Stat th={th} label="Unpaid Loads" value={unpaidLoads.length} icon="box" color={C.yellow}/>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14,marginBottom:18}}>
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
@@ -249,27 +436,37 @@ function Dashboard({th,loads,setPage}){
           </div>
         </div>
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
-          <div style={{fontWeight:600,marginBottom:12,fontSize:14}}>June 2026 Summary</div>
-          {[["Total Loads",JUNE_LOADS.length,C.accent],["Paid",JUNE_LOADS.filter(l=>l.pay==="Paid").length,C.green],["Unpaid",JUNE_LOADS.filter(l=>l.pay==="Unpaid").length,C.yellow],["Paid Commission",money(jPaid),C.green],["Pending Commission",money(jUnp),C.yellow]].map(r=>(
-            <div key={r[0]} style={{display:"flex",justifyContent:"space-between",fontSize:13,padding:"4px 0"}}>
-              <span style={{color:th.muted}}>{r[0]}</span><span style={{fontWeight:700,color:r[2]}}>{r[1]}</span>
+          <div style={{fontWeight:600,marginBottom:12,fontSize:14}}>Owner Split</div>
+          <div style={{background:"#1E6B2E22",border:"1px solid #1E6B2E44",borderRadius:11,padding:14,marginBottom:10}}>
+            <div style={{fontSize:11,color:th.muted,marginBottom:4}}>Net Revenue (after payment fees)</div>
+            <div style={{fontSize:18,fontWeight:700,color:C.green}}>{money(totalNetPaid)}</div>
+          </div>
+          <div style={{fontSize:13,color:th.muted,marginBottom:8}}>- Employee Commissions: <span style={{color:C.yellow,fontWeight:700}}>{money(totalEmpComm)}</span></div>
+          <div style={{borderTop:"1px solid "+th.bd,paddingTop:10,display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
+            <div style={{textAlign:"center",background:C.purple+"18",borderRadius:10,padding:10}}>
+              <div style={{fontSize:10,color:th.muted}}>Raza</div>
+              <div style={{fontWeight:700,color:C.purple,fontSize:16}}>{money(razaShare)}</div>
             </div>
-          ))}
+            <div style={{textAlign:"center",background:C.purple+"18",borderRadius:10,padding:10}}>
+              <div style={{fontSize:10,color:th.muted}}>Zaid</div>
+              <div style={{fontWeight:700,color:C.purple,fontSize:16}}>{money(zaidShare)}</div>
+            </div>
+          </div>
         </div>
       </div>
       <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
         <div style={{fontWeight:600,marginBottom:12,fontSize:14}}>Recent Loads</div>
         <div style={{overflowX:"auto"}}>
           <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-            <thead><tr>{["Driver","Broker","Commission","Status","Pay","Date"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+            <thead><tr>{["Driver","Booked By","Invoice","Net","Status","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
             <tbody>{recent.map(l=>(
               <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
-                <td style={{padding:"8px 10px",fontWeight:600}}>{l.dn||"-"}</td>
-                <td style={{padding:"8px 10px",color:th.muted}}>{l.bk||"-"}</td>
-                <td style={{padding:"8px 10px",fontWeight:700,color:C.green}}>{money(l.inv)}</td>
+                <td style={{padding:"8px 10px",fontWeight:600}}>{l.dn}</td>
+                <td style={{padding:"8px 10px",color:th.muted}}>{l.bb||"-"}</td>
+                <td style={{padding:"8px 10px",fontWeight:700}}>{money(l.inv)}</td>
+                <td style={{padding:"8px 10px",color:C.green,fontWeight:700}}>{money(netInv(l))}</td>
                 <td style={{padding:"8px 10px"}}><Badge color={statusColor(l.st)}>{l.st}</Badge></td>
-                <td style={{padding:"8px 10px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay||"Unpaid"}</Badge></td>
-                <td style={{padding:"8px 10px",color:th.muted}}>{fdate(l.pd)}</td>
+                <td style={{padding:"8px 10px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
               </tr>
             ))}</tbody>
           </table>
@@ -279,6 +476,7 @@ function Dashboard({th,loads,setPage}){
   );
 }
 
+//  JUNE PAGE 
 function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   const[view,setView]=useState("summary");
   const[selDrv,setSelDrv]=useState(null);
@@ -289,13 +487,11 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   const stats=useMemo(()=>drivers.map(d=>{
     const ld=JUNE_LOADS.filter(l=>l.dn===d.name);
     const pL=ld.filter(l=>l.pay==="Paid"),uL=ld.filter(l=>l.pay==="Unpaid");
-    return {...d,ld,pL,uL,
+    return{...d,ld,pL,uL,
       pRC:pL.reduce((s,l)=>s+(l.rc||0),0),uRC:uL.reduce((s,l)=>s+(l.rc||0),0),
-      pC:pL.reduce((s,l)=>s+(l.inv||0),0),uC:uL.reduce((s,l)=>s+(l.inv||0),0)};
+      pNet:pL.reduce((s,l)=>s+netInv(l),0),uNet:uL.reduce((s,l)=>s+netInv(l),0),
+      pInv:pL.reduce((s,l)=>s+(l.inv||0),0),uInv:uL.reduce((s,l)=>s+(l.inv||0),0)};
   }),[drivers]);
-
-  const gPC=stats.reduce((s,d)=>s+d.pC,0),gUC=stats.reduce((s,d)=>s+d.uC,0);
-  const gPRC=stats.reduce((s,d)=>s+d.pRC,0),gURC=stats.reduce((s,d)=>s+d.uRC,0);
 
   const fLoads=useMemo(()=>{
     let l=JUNE_LOADS.slice();
@@ -307,23 +503,20 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   if(view==="driver"&&selDrv){
     const sec=stats.find(d=>d.name===selDrv);
     if(!sec)return null;
-    return (
+    return(
       <div>
-        <button onClick={()=>{setView("summary");setSelDrv(null);}} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back to June 2026"}</button>
-        <div style={{marginBottom:16}}>
-          <h2 style={{margin:0,fontSize:19,fontWeight:700}}>{sec.name}</h2>
-          <div style={{fontSize:12,color:th.muted,marginTop:3}}>{sec.note} - Rate: <span style={{color:C.yellow,fontWeight:700}}>{sec.rate}%</span></div>
-        </div>
+        <button onClick={()=>{setView("summary");setSelDrv(null);}} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
+        <div style={{marginBottom:16}}><h2 style={{margin:0,fontSize:19,fontWeight:700}}>{sec.name}</h2><div style={{fontSize:12,color:th.muted}}>{sec.note} - Rate: <span style={{color:C.yellow,fontWeight:700}}>{sec.rate}%</span></div></div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:16}}>
           <div style={{background:"#1E6B2E22",border:"1px solid #1E6B2E55",borderRadius:13,padding:16}}>
-            <div style={{fontSize:11,color:C.green,fontWeight:700,marginBottom:8}}>PAID LOADS - {sec.pL.length}</div>
-            <div style={{fontSize:13,marginBottom:4}}><span style={{color:th.muted}}>Total RC:</span> <b>{money(sec.pRC)}</b></div>
-            <div style={{fontSize:15,fontWeight:700,color:C.green}}>Commission: {money(sec.pC)}</div>
+            <div style={{fontSize:11,color:C.green,fontWeight:700,marginBottom:6}}>PAID - {sec.pL.length} loads</div>
+            <div style={{fontSize:13,marginBottom:3}}><span style={{color:th.muted}}>Invoice:</span> <b>{money(sec.pInv)}</b></div>
+            <div style={{fontSize:13,marginBottom:3}}><span style={{color:th.muted}}>Net (after fees):</span> <b style={{color:C.green}}>{money(sec.pNet)}</b></div>
           </div>
           <div style={{background:"#8B250022",border:"1px solid #8B250055",borderRadius:13,padding:16}}>
-            <div style={{fontSize:11,color:C.yellow,fontWeight:700,marginBottom:8}}>UNPAID LOADS - {sec.uL.length}</div>
-            <div style={{fontSize:13,marginBottom:4}}><span style={{color:th.muted}}>Total RC:</span> <b>{money(sec.uRC)}</b></div>
-            <div style={{fontSize:15,fontWeight:700,color:C.yellow}}>Commission: {money(sec.uC)}</div>
+            <div style={{fontSize:11,color:C.yellow,fontWeight:700,marginBottom:6}}>UNPAID - {sec.uL.length} loads</div>
+            <div style={{fontSize:13,marginBottom:3}}><span style={{color:th.muted}}>Invoice:</span> <b>{money(sec.uInv)}</b></div>
+            <div style={{fontSize:13,marginBottom:3}}><span style={{color:th.muted}}>Net (after fees):</span> <b style={{color:C.yellow}}>{money(sec.uNet)}</b></div>
           </div>
         </div>
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
@@ -331,17 +524,17 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
           {sec.ld.length===0?<div style={{color:th.muted,textAlign:"center",padding:24}}>No loads.</div>:(
             <div style={{overflowX:"auto"}}>
               <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-                <thead><tr>{["Date","Broker","RC","Invoice","Status","Pay","Route","Booked By"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+                <thead><tr>{["Date","Broker","RC","Invoice","Fee%","Net","Status","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
                 <tbody>{sec.ld.map(l=>(
                   <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
                     <td style={{padding:"8px 10px",whiteSpace:"nowrap"}}>{fdate(l.pd)}</td>
                     <td style={{padding:"8px 10px"}}>{l.bk||"-"}</td>
-                    <td style={{padding:"8px 10px",fontWeight:600}}>{money(l.rc)}</td>
-                    <td style={{padding:"8px 10px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(l.inv)}</td>
+                    <td style={{padding:"8px 10px"}}>{money(l.rc)}</td>
+                    <td style={{padding:"8px 10px"}}>{money(l.inv)}</td>
+                    <td style={{padding:"8px 10px",color:th.muted}}>{l.factor||3}%</td>
+                    <td style={{padding:"8px 10px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
                     <td style={{padding:"8px 10px"}}><Badge color={statusColor(l.st)}>{l.st}</Badge></td>
                     <td style={{padding:"8px 10px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
-                    <td style={{padding:"8px 10px",color:th.muted,fontSize:11}}>{l.pl}-{l.dl}</td>
-                    <td style={{padding:"8px 10px",color:th.muted}}>{l.bb||"-"}</td>
                   </tr>
                 ))}</tbody>
               </table>
@@ -351,17 +544,17 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
       </div>
     );
   }
+  if(view==="rates")return(
+    <div>
+      <button onClick={()=>setView("summary")} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
+      <RateEditor th={th} drivers={drivers} setDrivers={setDrivers} employees={employees} setEmployees={setEmployees} inp={inp}/>
+    </div>
+  );
 
-  if(view==="rates"){
-    return (
-      <div>
-        <button onClick={()=>setView("summary")} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
-        <RateEditor th={th} drivers={drivers} setDrivers={setDrivers} employees={employees} setEmployees={setEmployees} inp={inp}/>
-      </div>
-    );
-  }
+  const gPNet=stats.reduce((s,d)=>s+d.pNet,0),gUNet=stats.reduce((s,d)=>s+d.uNet,0);
+  const gPInv=stats.reduce((s,d)=>s+d.pInv,0),gUInv=stats.reduce((s,d)=>s+d.uInv,0);
 
-  return (
+  return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:10}}>
         <h2 style={{margin:0,fontSize:19,fontWeight:700}}>June 2026 <span style={{fontSize:12,color:th.muted,fontWeight:400}}>({JUNE_LOADS.length} loads)</span></h2>
@@ -372,10 +565,10 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
         <Stat th={th} label="Paid Loads" value={JUNE_LOADS.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
         <Stat th={th} label="Unpaid Loads" value={JUNE_LOADS.filter(l=>l.pay==="Unpaid").length} color={C.yellow} icon="box"/>
-        <Stat th={th} label="RC (Paid)" value={money(gPRC)} color={C.green} icon="dollar"/>
-        <Stat th={th} label="RC (Unpaid)" value={money(gURC)} color={C.yellow} icon="dollar"/>
-        <Stat th={th} label="Comm (Paid)" value={money(gPC)} color={C.green} icon="pay"/>
-        <Stat th={th} label="Comm (Unpaid)" value={money(gUC)} color={C.yellow} icon="pay"/>
+        <Stat th={th} label="Invoice (Paid)" value={money(gPInv)} color={C.green} icon="dollar"/>
+        <Stat th={th} label="Net (Paid)" value={money(gPNet)} color={C.green} icon="pay" sub="After payment fees"/>
+        <Stat th={th} label="Invoice (Unpaid)" value={money(gUInv)} color={C.yellow} icon="dollar"/>
+        <Stat th={th} label="Net (Unpaid)" value={money(gUNet)} color={C.yellow} icon="pay"/>
       </div>
       <div style={{display:"flex",gap:9,marginBottom:14,flexWrap:"wrap"}}>
         <div style={{flex:1,minWidth:170,position:"relative"}}>
@@ -389,14 +582,14 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
           <div style={{fontWeight:600,marginBottom:10,fontSize:13}}>Filtered ({fLoads.length})</div>
           <div style={{overflowX:"auto"}}>
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr>{["Driver","Date","Broker","RC","Invoice","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"6px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"6px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
               <tbody>{fLoads.map(l=>(
                 <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
                   <td style={{padding:"7px 9px",fontWeight:600}}>{l.dn}</td>
-                  <td style={{padding:"7px 9px",color:th.muted}}>{fdate(l.pd)}</td>
                   <td style={{padding:"7px 9px"}}>{l.bk||"-"}</td>
-                  <td style={{padding:"7px 9px"}}>{money(l.rc)}</td>
-                  <td style={{padding:"7px 9px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(l.inv)}</td>
+                  <td style={{padding:"7px 9px"}}>{money(l.inv)}</td>
+                  <td style={{padding:"7px 9px",color:th.muted}}>{l.factor||3}%</td>
+                  <td style={{padding:"7px 9px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
                   <td style={{padding:"7px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
                 </tr>
               ))}</tbody>
@@ -420,8 +613,8 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
               </div>
               <div style={{display:"flex",alignItems:"center",gap:12,flexShrink:0}}>
                 <div style={{textAlign:"right"}}>
-                  <div style={{fontSize:13,fontWeight:700,color:C.green}}>{money(sec.pC)}</div>
-                  {sec.uC>0&&<div style={{fontSize:10,color:C.yellow}}>{money(sec.uC)} pending</div>}
+                  <div style={{fontSize:12,fontWeight:700,color:C.green}}>{money(sec.pNet)}<span style={{fontSize:9,color:th.muted,fontWeight:400}}> net</span></div>
+                  {sec.uNet>0&&<div style={{fontSize:10,color:C.yellow}}>{money(sec.uNet)} pending</div>}
                 </div>
                 <Icon name="arrow" size={15} color={th.muted}/>
               </div>
@@ -429,14 +622,12 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
             {sec.ld.length>0&&(
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",borderTop:"1px solid "+th.bd}}>
                 <div style={{padding:"9px 16px",borderRight:"1px solid "+th.bd,background:"#1E6B2E11"}}>
-                  <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>Paid RC</div>
-                  <div style={{fontSize:13,fontWeight:700}}>{money(sec.pRC)}</div>
-                  <div style={{fontSize:10,color:th.muted}}>Comm: {money(sec.pC)}</div>
+                  <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>Paid Invoice / Net</div>
+                  <div style={{fontSize:12,fontWeight:700}}>{money(sec.pInv)} / <span style={{color:C.green}}>{money(sec.pNet)}</span></div>
                 </div>
                 <div style={{padding:"9px 16px",background:"#8B250011"}}>
-                  <div style={{fontSize:10,color:C.yellow,fontWeight:700,marginBottom:2}}>Unpaid RC</div>
-                  <div style={{fontSize:13,fontWeight:700}}>{money(sec.uRC)}</div>
-                  <div style={{fontSize:10,color:th.muted}}>Comm: {money(sec.uC)}</div>
+                  <div style={{fontSize:10,color:C.yellow,fontWeight:700,marginBottom:2}}>Unpaid Invoice / Net</div>
+                  <div style={{fontSize:12,fontWeight:700}}>{money(sec.uInv)} / <span style={{color:C.yellow}}>{money(sec.uNet)}</span></div>
                 </div>
               </div>
             )}
@@ -447,45 +638,39 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   );
 }
 
+//  RATE EDITOR 
 function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
   const[tab,setTab]=useState("drivers");
   const[nd,setNd]=useState({name:"",rate:"",note:""});
   const[showD,setShowD]=useState(false);
-  const[ne,setNe]=useState({name:"",role:"Dispatcher",pct:""});
-  const[showE,setShowE]=useState(false);
   const[editE,setEditE]=useState(null);
+  const[ne,setNe]=useState({name:"",role:"Dispatcher",pct:"",pass:"",threshold:false,thresholdAmt:1000,basePct:"",bonusPct:""});
+  const[showE,setShowE]=useState(false);
   const tb=(t,l)=><button onClick={()=>setTab(t)} style={{padding:"7px 16px",border:"none",borderRadius:9,cursor:"pointer",fontSize:12,fontWeight:600,background:tab===t?C.accent:th.s2,color:tab===t?"#fff":th.muted}}>{l}</button>;
-  return (
+
+  return(
     <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:16,padding:22}}>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18,flexWrap:"wrap",gap:10}}>
-        <div>
-          <div style={{fontWeight:700,fontSize:16}}>Rate & Employee Editor</div>
-          <div style={{fontSize:11,color:th.muted,marginTop:2}}>Yellow = editable rate. Add new drivers or employees below.</div>
-        </div>
+        <div><div style={{fontWeight:700,fontSize:16}}>Rate and Employee Editor</div><div style={{fontSize:11,color:th.muted,marginTop:2}}>Yellow = editable. Manage rates, thresholds and employee logins.</div></div>
         <div style={{display:"flex",gap:8}}>{tb("drivers","Driver Rates")}{tb("emp","Employees")}</div>
       </div>
+
       {tab==="drivers"&&(
         <div>
           <div style={{overflowX:"auto",marginBottom:16}}>
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr style={{background:th.s2}}>{["#","Driver","Rate %","Notes","Paid","RC Paid","Comm Paid",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+              <thead><tr style={{background:th.s2}}>{["#","Driver","Rate %","Notes","Paid Loads","Net Paid",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
               <tbody>{drivers.map((d,i)=>{
                 const ld=JUNE_LOADS.filter(l=>l.dn===d.name&&l.pay==="Paid");
-                const rc=ld.reduce((s,l)=>s+(l.rc||0),0),cm=ld.reduce((s,l)=>s+(l.inv||0),0);
-                return (
+                const net=ld.reduce((s,l)=>s+netInv(l),0);
+                return(
                   <tr key={i} style={{borderBottom:"1px solid "+th.bd,background:i%2===0?th.surf:th.s2}}>
                     <td style={{padding:"9px 11px",color:th.muted,fontSize:10}}>{i+1}</td>
                     <td style={{padding:"9px 11px",fontWeight:700}}>{d.name}</td>
-                    <td style={{padding:"5px 11px"}}>
-                      <div style={{display:"flex",alignItems:"center",gap:5}}>
-                        <input type="number" value={d.rate} onChange={e=>setDrivers(ds=>ds.map((x,j)=>j===i?{...x,rate:parseFloat(e.target.value)||0}:x))} style={{...inp,width:54,padding:"5px 7px",background:"#FFFF0022",border:"1px solid #FFFF0066",fontWeight:700,color:C.yellow,textAlign:"center"}}/>
-                        <span style={{color:th.muted,fontSize:11}}>%</span>
-                      </div>
-                    </td>
+                    <td style={{padding:"5px 11px"}}><div style={{display:"flex",alignItems:"center",gap:5}}><input type="number" value={d.rate} onChange={e=>setDrivers(ds=>ds.map((x,j)=>j===i?{...x,rate:parseFloat(e.target.value)||0}:x))} style={{...inp,width:54,padding:"5px 7px",background:"#FFFF0022",border:"1px solid #FFFF0066",fontWeight:700,color:C.yellow,textAlign:"center"}}/><span style={{color:th.muted,fontSize:11}}>%</span></div></td>
                     <td style={{padding:"5px 11px"}}><input value={d.note} onChange={e=>setDrivers(ds=>ds.map((x,j)=>j===i?{...x,note:e.target.value}:x))} style={{...inp,width:"100%",minWidth:130,fontSize:11,padding:"5px 9px"}}/></td>
                     <td style={{padding:"9px 11px",fontWeight:700,color:C.green,textAlign:"center"}}>{ld.length}</td>
-                    <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(rc)}</td>
-                    <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(cm)}</td>
+                    <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(net)}</td>
                     <td style={{padding:"5px 11px"}}><button onClick={()=>{if(window.confirm("Remove "+d.name+"?"))setDrivers(ds=>ds.filter((_,j)=>j!==i));}} style={{background:C.red+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="trash" size={12} color={C.red}/></button></td>
                   </tr>
                 );
@@ -500,7 +685,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
                 <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Rate % *</div><input type="number" style={{...inp,width:70}} placeholder="8" value={nd.rate} onChange={e=>setNd(s=>({...s,rate:e.target.value}))}/></div>
                 <div style={{flex:1,minWidth:130}}><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Notes</div><input style={{...inp,width:"100%"}} placeholder="RC x 8%" value={nd.note} onChange={e=>setNd(s=>({...s,note:e.target.value}))}/></div>
                 <div style={{display:"flex",gap:7}}>
-                  <button onClick={()=>{if(!nd.name||!nd.rate){window.alert("Name & Rate required");return;}setDrivers(ds=>[...ds,{name:nd.name,rate:parseFloat(nd.rate)||0,note:nd.note||"RC x "+nd.rate+"%"}]);setNd({name:"",rate:"",note:""});setShowD(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
+                  <button onClick={()=>{if(!nd.name||!nd.rate){window.alert("Name and Rate required");return;}setDrivers(ds=>[...ds,{name:nd.name,rate:parseFloat(nd.rate)||0,note:nd.note||"RC x "+nd.rate+"%"}]);setNd({name:"",rate:"",note:""});setShowD(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
                   <button onClick={()=>setShowD(false)} style={{background:th.surf,color:th.muted,border:"1px solid "+th.bd,borderRadius:9,padding:"8px 11px",fontSize:12,cursor:"pointer"}}>Cancel</button>
                 </div>
               </div>
@@ -510,33 +695,68 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
           )}
         </div>
       )}
+
       {tab==="emp"&&(
         <div>
           <div style={{overflowX:"auto",marginBottom:16}}>
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr style={{background:th.s2}}>{["#","Name","Role","Rate %","Jun Loads","Jun Comm",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+              <thead><tr style={{background:th.s2}}>{["#","Name","Role","Pass","Rate%","Threshold","Assigned Drivers","Jun Comm",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
               <tbody>{employees.map((d,i)=>{
-                const ml=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
-                const cm=ml.filter(l=>l.pay==="Paid").reduce((s,l)=>s+(l.inv||0),0);
+                const paidL=JUNE_LOADS.filter(l=>l.pay==="Paid");
+                const comm=calcCommission(d,paidL);
                 const ed=editE===d.id;
-                return (
+                return(
                   <tr key={d.id} style={{borderBottom:"1px solid "+th.bd,background:i%2===0?th.surf:th.s2}}>
                     <td style={{padding:"9px 11px",color:th.muted,fontSize:10}}>{i+1}</td>
                     {ed?(
                       <>
-                        <td style={{padding:"5px 11px"}}><input value={d.name} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,name:e.target.value}:x))} style={{...inp,width:110}}/></td>
-                        <td style={{padding:"5px 11px"}}><select value={d.role} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,role:e.target.value}:x))} style={{...inp,cursor:"pointer"}}><option>Dispatcher</option><option>Sales</option><option>Manager</option></select></td>
-                        <td style={{padding:"5px 11px"}}><div style={{display:"flex",alignItems:"center",gap:5}}><input type="number" value={d.pct} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,pct:parseFloat(e.target.value)||0}:x))} style={{...inp,width:54,padding:"5px 7px",background:"#FFFF0022",border:"1px solid #FFFF0066",fontWeight:700,color:C.yellow,textAlign:"center"}}/><span style={{color:th.muted,fontSize:11}}>%</span></div></td>
+                        <td style={{padding:"5px 8px"}}><input value={d.name} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,name:e.target.value}:x))} style={{...inp,width:90}}/></td>
+                        <td style={{padding:"5px 8px"}}>
+                          <select value={d.role} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,role:e.target.value}:x))} style={{...inp,cursor:"pointer",width:100}}>
+                            <option>Dispatcher</option><option>Owner</option><option>Manager</option>
+                          </select>
+                        </td>
+                        <td style={{padding:"5px 8px"}}><input value={d.pass} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,pass:e.target.value}:x))} style={{...inp,width:90}} placeholder="password"/></td>
+                        <td style={{padding:"5px 8px"}}><div style={{display:"flex",alignItems:"center",gap:4}}><input type="number" value={d.pct} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,pct:parseFloat(e.target.value)||0,basePct:parseFloat(e.target.value)||0}:x))} style={{...inp,width:50,background:"#FFFF0022",border:"1px solid #FFFF0066",fontWeight:700,color:C.yellow,textAlign:"center"}}/><span style={{fontSize:10,color:th.muted}}>%</span></div></td>
+                        <td style={{padding:"5px 8px"}}>
+                          <div style={{display:"flex",flexDirection:"column",gap:4}}>
+                            <label style={{fontSize:10,display:"flex",alignItems:"center",gap:4,color:th.muted,cursor:"pointer"}}>
+                              <input type="checkbox" checked={d.threshold||false} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,threshold:e.target.checked}:x))}/>Enable
+                            </label>
+                            {d.threshold&&(
+                              <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
+                                <input type="number" placeholder="$1000" value={d.thresholdAmt} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,thresholdAmt:parseFloat(e.target.value)||1000}:x))} style={{...inp,width:70,fontSize:10,padding:"4px 6px"}}/>
+                                <input type="number" placeholder="bonus%" value={d.bonusPct} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,bonusPct:parseFloat(e.target.value)||0}:x))} style={{...inp,width:55,fontSize:10,padding:"4px 6px",background:"#FFFF0022",border:"1px solid #FFFF0066",color:C.yellow}}/>
+                                <span style={{fontSize:9,color:th.muted,alignSelf:"center"}}>%</span>
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                        <td style={{padding:"5px 8px"}}>
+                          <select multiple value={d.assignedDrivers||[]} onChange={e=>setEmployees(es=>es.map(x=>x.id===d.id?{...x,assignedDrivers:Array.from(e.target.selectedOptions,o=>o.value)}:x))} style={{...inp,width:140,height:60,fontSize:10}}>
+                            {DEFAULT_DRIVERS.map(drv=><option key={drv.name} value={drv.name}>{drv.name}</option>)}
+                          </select>
+                          <div style={{fontSize:9,color:th.muted,marginTop:2}}>Hold Ctrl to multi-select</div>
+                        </td>
                       </>
                     ):(
                       <>
                         <td style={{padding:"9px 11px",fontWeight:700}}>{d.name}</td>
                         <td style={{padding:"9px 11px",color:th.muted}}>{d.role}</td>
-                        <td style={{padding:"9px 11px"}}><span style={{background:"#FFFF0022",color:C.yellow,fontWeight:700,padding:"2px 9px",borderRadius:20,fontSize:11}}>{d.pct}%</span></td>
+                        <td style={{padding:"9px 11px",color:th.muted,fontStyle:"italic",fontSize:11}}>{d.pass||"not set"}</td>
+                        <td style={{padding:"9px 11px"}}><span style={{background:"#FFFF0022",color:C.yellow,fontWeight:700,padding:"2px 7px",borderRadius:20,fontSize:11}}>{d.pct}%</span></td>
+                        <td style={{padding:"9px 11px"}}>
+                          {d.threshold?(
+                            <div style={{fontSize:10}}>
+                              <span style={{background:C.yellow+"22",color:C.yellow,padding:"2px 6px",borderRadius:10,fontWeight:700}}>ON</span>
+                              <div style={{color:th.muted,marginTop:2}}>${d.thresholdAmt} | {d.basePct}%-{d.bonusPct}%</div>
+                            </div>
+                          ):<span style={{fontSize:10,color:th.muted}}>Off</span>}
+                        </td>
+                        <td style={{padding:"9px 11px",fontSize:11,color:th.muted}}>{(d.assignedDrivers||[]).join(", ")||"None"}</td>
                       </>
                     )}
-                    <td style={{padding:"9px 11px",fontWeight:700,textAlign:"center"}}>{ml.length}</td>
-                    <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(cm)}</td>
+                    <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(comm)}</td>
                     <td style={{padding:"5px 11px"}}>
                       <div style={{display:"flex",gap:5}}>
                         {ed?<button onClick={()=>setEditE(null)} style={{background:C.green+"22",color:C.green,border:"none",borderRadius:6,padding:"4px 10px",cursor:"pointer",fontSize:11,fontWeight:600}}>Done</button>:<button onClick={()=>setEditE(d.id)} style={{background:C.accent+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="edit" size={12} color={C.accent}/></button>}
@@ -552,11 +772,12 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
             <div style={{background:th.s2,border:"1px solid "+th.bd,borderRadius:12,padding:16,marginBottom:12}}>
               <div style={{fontWeight:600,marginBottom:10,fontSize:13}}>Add New Employee</div>
               <div style={{display:"flex",gap:9,flexWrap:"wrap",alignItems:"flex-end"}}>
-                <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Name *</div><input style={{...inp,minWidth:140}} placeholder="Name" value={ne.name} onChange={e=>setNe(s=>({...s,name:e.target.value}))}/></div>
-                <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Role</div><select style={{...inp,cursor:"pointer"}} value={ne.role} onChange={e=>setNe(s=>({...s,role:e.target.value}))}><option>Dispatcher</option><option>Sales</option><option>Manager</option></select></div>
+                <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Name *</div><input style={{...inp,minWidth:120}} placeholder="Name" value={ne.name} onChange={e=>setNe(s=>({...s,name:e.target.value}))}/></div>
+                <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Password *</div><input style={{...inp,width:110}} placeholder="password" value={ne.pass} onChange={e=>setNe(s=>({...s,pass:e.target.value}))}/></div>
+                <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Role</div><select style={{...inp,cursor:"pointer"}} value={ne.role} onChange={e=>setNe(s=>({...s,role:e.target.value}))}><option>Dispatcher</option><option>Owner</option><option>Manager</option></select></div>
                 <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Rate %</div><input type="number" style={{...inp,width:70}} placeholder="10" value={ne.pct} onChange={e=>setNe(s=>({...s,pct:e.target.value}))}/></div>
                 <div style={{display:"flex",gap:7}}>
-                  <button onClick={()=>{if(!ne.name){window.alert("Name required");return;}setEmployees(es=>[...es,{id:gid(),name:ne.name,role:ne.role,pct:parseFloat(ne.pct)||0}]);setNe({name:"",role:"Dispatcher",pct:""});setShowE(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
+                  <button onClick={()=>{if(!ne.name||!ne.pass){window.alert("Name and Password required");return;}setEmployees(es=>[...es,{id:gid(),name:ne.name,role:ne.role,pct:parseFloat(ne.pct)||0,pass:ne.pass,assignedDrivers:[],threshold:false,thresholdAmt:1000,basePct:parseFloat(ne.pct)||0,bonusPct:parseFloat(ne.pct)+5||5}]);setNe({name:"",role:"Dispatcher",pct:"",pass:"",threshold:false,thresholdAmt:1000,basePct:"",bonusPct:""});setShowE(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
                   <button onClick={()=>setShowE(false)} style={{background:th.surf,color:th.muted,border:"1px solid "+th.bd,borderRadius:9,padding:"8px 11px",fontSize:12,cursor:"pointer"}}>Cancel</button>
                 </div>
               </div>
@@ -570,11 +791,12 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
   );
 }
 
+//  LOADS PAGE 
 function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
   const[search,setSearch]=useState("");
   const[sf,setSf]=useState("All");
   const[pf,setPf]=useState("All");
-  const all=loads.concat(JUNE_LOADS);
+  const all=[...loads,...JUNE_LOADS];
   const filtered=useMemo(()=>{
     let l=all.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
@@ -586,7 +808,7 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
   const sel={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 11px",fontSize:12};
-  return (
+  return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:9}}>
         <h2 style={{margin:0,fontSize:19,fontWeight:700}}>Loads <span style={{fontSize:12,color:th.muted,fontWeight:400}}>({filtered.length})</span></h2>
@@ -614,7 +836,8 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
 
 function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
   const[ex,setEx]=useState(false);
-  return (
+  const net=netInv(l);
+  return(
     <div style={{background:th.surf,border:"1px solid "+(isJune?"#0EA5E944":th.bd),borderRadius:13,overflow:"hidden"}}>
       <div style={{padding:"12px 16px",display:"flex",alignItems:"flex-start",gap:10,cursor:"pointer"}} onClick={()=>setEx(e=>!e)}>
         <div style={{flex:1}}>
@@ -629,14 +852,14 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
           </div>
         </div>
         <div style={{textAlign:"right",flexShrink:0}}>
-          <div style={{fontSize:15,fontWeight:700,color:C.green}}>{money(l.inv)}</div>
-          <div style={{fontSize:10,color:th.muted}}>RC: {money(l.rc)}</div>
+          <div style={{fontSize:15,fontWeight:700,color:C.green}}>{money(net)}<span style={{fontSize:9,color:th.muted,fontWeight:400}}> net</span></div>
+          <div style={{fontSize:10,color:th.muted}}>Inv: {money(l.inv)} | {l.factor||3}% fee</div>
         </div>
       </div>
       {ex&&(
         <div style={{borderTop:"1px solid "+th.bd,padding:"12px 16px"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:9,marginBottom:12,fontSize:11}}>
-            {[["Booked By",l.bb],["Broker",l.bk],["RC",money(l.rc)],["Detention",money(l.det||0)],["Delivery",fdate(l.dd)],["Route",(l.pl||"")+" - "+(l.dl||"")]].map(r=>(
+            {[["Booked By",l.bb],["Broker",l.bk],["RC",money(l.rc)],["Invoice",money(l.inv)],["Payment Fee",l.factor+"%"],["Net Amount",money(net)],["Delivery",fdate(l.dd)],["Route",(l.pl||"")+" - "+(l.dl||"")]].map(r=>(
               <div key={r[0]}><div style={{color:th.muted,fontSize:9,marginBottom:1}}>{r[0]}</div><div style={{fontWeight:500}}>{r[1]||"-"}</div></div>
             ))}
           </div>
@@ -653,71 +876,85 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
   );
 }
 
+//  EMPLOYEES PAGE 
 function EmployeesPage({th,employees}){
   const[sel,setSel]=useState(null);
   if(sel){
     const d=employees.find(x=>x.id===sel);
     if(!d)return null;
-    const ml=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
-    const pl=ml.filter(l=>l.pay==="Paid");
-    return (
+    const paidLoads=JUNE_LOADS.filter(l=>l.pay==="Paid");
+    const comm=calcCommission(d,paidLoads);
+    const myLoads=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
+    return(
       <div>
         <button onClick={()=>setSel(null)} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
         <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:18}}>
           <div style={{width:44,height:44,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:18}}>{d.name.charAt(0)}</div>
-          <div><div style={{fontWeight:700,fontSize:17}}>{d.name}</div><div style={{fontSize:12,color:th.muted}}>{d.role} - <span style={{color:C.yellow,fontWeight:700}}>{d.pct}% default</span></div></div>
+          <div>
+            <div style={{fontWeight:700,fontSize:17}}>{d.name}</div>
+            <div style={{fontSize:12,color:th.muted}}>{d.role} | <span style={{color:C.yellow,fontWeight:700}}>{d.pct}% base rate</span>{d.threshold&&<span style={{color:C.cyan}}> | Threshold: ${d.thresholdAmt} then {d.bonusPct}%</span>}</div>
+          </div>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(130px,1fr))",gap:10,marginBottom:16}}>
-          <Stat th={th} label="June Loads" value={ml.length} color={C.accent} icon="box"/>
-          <Stat th={th} label="Paid Loads" value={pl.length} color={C.green} icon="check"/>
-          <Stat th={th} label="RC (Paid)" value={money(pl.reduce((s,l)=>s+(l.rc||0),0))} color={C.green} icon="dollar"/>
-          <Stat th={th} label="Commission" value={money(pl.reduce((s,l)=>s+(l.inv||0),0))} color={C.green} icon="pay"/>
+          <Stat th={th} label="June Loads" value={myLoads.length} color={C.accent} icon="box"/>
+          <Stat th={th} label="Paid Loads" value={myLoads.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
+          <Stat th={th} label="Commission" value={money(comm)} color={C.green} icon="dollar" sub="After payment fees"/>
+          {d.threshold&&<Stat th={th} label="Threshold" value={money(d.thresholdAmt)} color={C.yellow} icon="bolt" sub={d.basePct+"% / "+d.bonusPct+"%"}/>}
         </div>
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
           <div style={{fontWeight:600,marginBottom:12}}>June Load History</div>
-          {ml.length===0?<div style={{color:th.muted,fontSize:13}}>No loads booked by {d.name} in June.</div>:(
+          {myLoads.length===0?<div style={{color:th.muted,fontSize:13}}>No loads.</div>:(
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr>{["Driver","Broker","RC","Invoice","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
-              <tbody>{ml.map(l=>(
-                <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
-                  <td style={{padding:"8px 9px"}}>{l.dn}</td>
-                  <td style={{padding:"8px 9px",color:th.muted}}>{l.bk||"-"}</td>
-                  <td style={{padding:"8px 9px"}}>{money(l.rc)}</td>
-                  <td style={{padding:"8px 9px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(l.inv)}</td>
-                  <td style={{padding:"8px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
-                </tr>
-              ))}</tbody>
+              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay","Comm"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
+              <tbody>{myLoads.map(l=>{
+                const net=netInv(l);
+                const c=l.pay==="Paid"?net*(d.pct/100):0;
+                return(
+                  <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
+                    <td style={{padding:"8px 9px"}}>{l.dn}</td>
+                    <td style={{padding:"8px 9px",color:th.muted}}>{l.bk||"-"}</td>
+                    <td style={{padding:"8px 9px"}}>{money(l.inv)}</td>
+                    <td style={{padding:"8px 9px",color:th.muted}}>{l.factor||3}%</td>
+                    <td style={{padding:"8px 9px"}}>{money(net)}</td>
+                    <td style={{padding:"8px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
+                    <td style={{padding:"8px 9px",fontWeight:700,color:C.green}}>{l.pay==="Paid"?money(c):"-"}</td>
+                  </tr>
+                );
+              })}</tbody>
             </table>
           )}
         </div>
       </div>
     );
   }
-  return (
+  return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18}}>
         <h2 style={{margin:0,fontSize:19,fontWeight:700}}>Employees</h2>
-        <span style={{fontSize:11,color:th.muted}}>Edit % in June 2026 - Rate Editor</span>
+        <span style={{fontSize:11,color:th.muted}}>Edit in June 2026 - Rate Editor</span>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(230px,1fr))",gap:11}}>
         {employees.map(d=>{
-          const ml=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
-          const cm=ml.filter(l=>l.pay==="Paid").reduce((s,l)=>s+(l.inv||0),0);
-          return (
+          const paidLoads=JUNE_LOADS.filter(l=>l.pay==="Paid");
+          const comm=calcCommission(d,paidLoads);
+          const myLoads=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
+          return(
             <div key={d.id} onClick={()=>setSel(d.id)} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:16,cursor:"pointer"}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:11}}>
                 <div style={{display:"flex",alignItems:"center",gap:9}}>
                   <div style={{width:33,height:33,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:14}}>{d.name.charAt(0)}</div>
                   <div><div style={{fontWeight:600,fontSize:13}}>{d.name}</div><div style={{fontSize:10,color:th.muted}}>{d.role}</div></div>
                 </div>
-                <div style={{display:"flex",alignItems:"center",gap:7}}>
+                <div style={{display:"flex",alignItems:"center",gap:6}}>
+                  {d.threshold&&<span style={{background:C.yellow+"22",color:C.yellow,fontSize:9,fontWeight:700,padding:"1px 5px",borderRadius:10}}>THRESH</span>}
                   <span style={{background:"#FFFF0022",color:C.yellow,fontSize:11,fontWeight:700,padding:"2px 8px",borderRadius:20}}>{d.pct}%</span>
                   <Icon name="arrow" size={13} color={th.muted}/>
                 </div>
               </div>
+              {d.threshold&&<div style={{background:C.yellow+"18",borderRadius:8,padding:"5px 9px",fontSize:10,color:C.yellow,fontWeight:600,marginBottom:8}}>Threshold: ${d.thresholdAmt} | {d.basePct}% / {d.bonusPct}%</div>}
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
-                <div><div style={{fontSize:9,color:th.muted}}>Jun Loads</div><div style={{fontWeight:700,fontSize:13}}>{ml.length}</div></div>
-                <div><div style={{fontSize:9,color:th.muted}}>Jun Commission</div><div style={{fontWeight:700,color:C.green,fontSize:12}}>{money(cm)}</div></div>
+                <div><div style={{fontSize:9,color:th.muted}}>Jun Loads</div><div style={{fontWeight:700,fontSize:13}}>{myLoads.length}</div></div>
+                <div><div style={{fontSize:9,color:th.muted}}>Jun Commission</div><div style={{fontWeight:700,color:C.green,fontSize:12}}>{money(comm)}</div></div>
               </div>
             </div>
           );
@@ -727,72 +964,83 @@ function EmployeesPage({th,employees}){
   );
 }
 
+//  PAYROLL PAGE 
 function PayrollPage({th,employees}){
   const[month,setMonth]=useState("2026-06");
   const isJune=month==="2026-06";
+  const paidLoads=isJune?JUNE_LOADS.filter(l=>l.pay==="Paid"):[];
   const stats=employees.map(d=>{
-    const ml=isJune?JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase())):[];
-    const earned=ml.filter(l=>l.pay==="Paid").reduce((s,l)=>s+(l.inv||0),0);
-    return {...d,earned,loads:ml.length};
-  }).filter(d=>d.earned>0||d.loads>0);
-  const total=stats.reduce((s,d)=>s+d.earned,0);
-  return (
+    const comm=calcCommission(d,paidLoads);
+    const myL=paidLoads.filter(l=>l.bb&&l.bb.toLowerCase().includes(d.name.toLowerCase()));
+    return{...d,earned:comm,loads:myL.length};
+  });
+  const totalEmp=stats.filter(e=>e.role!=="Owner").reduce((s,e)=>s+e.earned,0);
+  const totalNet=paidLoads.reduce((s,l)=>s+netInv(l),0);
+  const ownerProfit=totalNet-totalEmp;
+  return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18,flexWrap:"wrap",gap:9}}>
         <h2 style={{margin:0,fontSize:19,fontWeight:700}}>Payroll</h2>
         <input type="month" value={month} onChange={e=>setMonth(e.target.value)} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"7px 11px",fontSize:13}}/>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(148px,1fr))",gap:10,marginBottom:18}}>
-        <Stat th={th} label="Total Earned" value={money(total)} color={C.green} icon="dollar"/>
-        <Stat th={th} label="Employees" value={stats.length} color={C.accent} icon="users"/>
+        <Stat th={th} label="Net Revenue" value={money(totalNet)} color={C.cyan} icon="dollar" sub="After payment fees"/>
+        <Stat th={th} label="Employee Comm" value={money(totalEmp)} color={C.yellow} icon="users"/>
+        <Stat th={th} label="Owner Profit" value={money(ownerProfit)} color={C.green} icon="dollar"/>
+        <Stat th={th} label="Raza (50%)" value={money(ownerProfit/2)} color={C.purple} icon="dollar"/>
+        <Stat th={th} label="Zaid (50%)" value={money(ownerProfit/2)} color={C.purple} icon="dollar"/>
       </div>
-      {stats.length===0?<div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:"50px 20px",textAlign:"center",color:th.muted}}>{isJune?"No commission data.":"Select June 2026."}</div>:(
-        <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,overflow:"hidden"}}>
-          <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
-            <thead><tr style={{background:th.s2}}>{["Employee","Role","Rate","Loads","Commission"].map(h=><th key={h} style={{textAlign:"left",padding:"11px 14px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
-            <tbody>{stats.map(e=>(
-              <tr key={e.id} style={{borderBottom:"1px solid "+th.bd}}>
-                <td style={{padding:"12px 14px"}}><div style={{display:"flex",alignItems:"center",gap:9}}><div style={{width:28,height:28,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:11}}>{e.name.charAt(0)}</div><span style={{fontWeight:600}}>{e.name}</span></div></td>
-                <td style={{padding:"12px 14px",color:th.muted,fontSize:12}}>{e.role}</td>
-                <td style={{padding:"12px 14px"}}><span style={{background:"#FFFF0022",color:C.yellow,fontWeight:700,padding:"2px 8px",borderRadius:20,fontSize:11}}>{e.pct}%</span></td>
-                <td style={{padding:"12px 14px",fontWeight:600,textAlign:"center"}}>{e.loads}</td>
-                <td style={{padding:"12px 14px",fontWeight:700,color:C.green}}>{money(e.earned)}</td>
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
-      )}
+      <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,overflow:"hidden"}}>
+        <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
+          <thead><tr style={{background:th.s2}}>{["Employee","Role","Rate","Threshold","Loads","Commission"].map(h=><th key={h} style={{textAlign:"left",padding:"11px 14px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
+          <tbody>{stats.map(e=>(
+            <tr key={e.id} style={{borderBottom:"1px solid "+th.bd}}>
+              <td style={{padding:"12px 14px"}}><div style={{display:"flex",alignItems:"center",gap:9}}><div style={{width:28,height:28,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:11}}>{e.name.charAt(0)}</div><span style={{fontWeight:600}}>{e.name}</span></div></td>
+              <td style={{padding:"12px 14px",color:th.muted,fontSize:12}}>{e.role}</td>
+              <td style={{padding:"12px 14px"}}><span style={{background:"#FFFF0022",color:C.yellow,fontWeight:700,padding:"2px 8px",borderRadius:20,fontSize:11}}>{e.pct}%</span></td>
+              <td style={{padding:"12px 14px"}}>
+                {e.threshold?<span style={{background:C.yellow+"22",color:C.yellow,fontSize:11,fontWeight:600,padding:"2px 8px",borderRadius:10}}>${e.thresholdAmt} | {e.basePct}%-{e.bonusPct}%</span>:<span style={{fontSize:11,color:th.muted}}>Off</span>}
+              </td>
+              <td style={{padding:"12px 14px",fontWeight:600,textAlign:"center"}}>{e.loads}</td>
+              <td style={{padding:"12px 14px",fontWeight:700,color:e.role==="Owner"?C.purple:C.green}}>{e.role==="Owner"?money(ownerProfit/2):money(e.earned)}</td>
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-function ReportsPage({th}){
+//  REPORTS PAGE 
+function ReportsPage({th,employees}){
   const paid=JUNE_LOADS.filter(l=>l.pay==="Paid"),unpaid=JUNE_LOADS.filter(l=>l.pay==="Unpaid");
+  const totalNet=paid.reduce((s,l)=>s+netInv(l),0);
+  const totalEmpComm=employees.filter(e=>e.role!=="Owner").reduce((s,e)=>s+calcCommission(e,paid),0);
   const by={};
-  JUNE_LOADS.forEach(l=>{if(!by[l.dn])by[l.dn]={n:l.dn,loads:0,rc:0,comm:0,paid:0};by[l.dn].loads++;by[l.dn].rc+=l.rc||0;by[l.dn].comm+=l.inv||0;if(l.pay==="Paid")by[l.dn].paid+=l.inv||0;});
-  const rows=Object.values(by).sort((a,b)=>b.rc-a.rc);
-  return (
+  JUNE_LOADS.forEach(l=>{if(!by[l.dn])by[l.dn]={n:l.dn,loads:0,inv:0,net:0,paid:0};by[l.dn].loads++;by[l.dn].inv+=l.inv||0;by[l.dn].net+=netInv(l);if(l.pay==="Paid")by[l.dn].paid+=netInv(l);});
+  const rows=Object.values(by).sort((a,b)=>b.inv-a.inv);
+  return(
     <div>
       <h2 style={{margin:"0 0 16px",fontSize:19,fontWeight:700}}>Reports - June 2026</h2>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(148px,1fr))",gap:10,marginBottom:18}}>
         <Stat th={th} label="Total Loads" value={JUNE_LOADS.length} color={C.accent} icon="box"/>
         <Stat th={th} label="Paid Loads" value={paid.length} color={C.green} icon="check"/>
-        <Stat th={th} label="Unpaid Loads" value={unpaid.length} color={C.yellow} icon="dollar"/>
-        <Stat th={th} label="Total RC" value={money(JUNE_LOADS.reduce((s,l)=>s+(l.rc||0),0))} color={C.accent} icon="dollar"/>
-        <Stat th={th} label="Paid Commission" value={money(paid.reduce((s,l)=>s+(l.inv||0),0))} color={C.green} icon="pay"/>
-        <Stat th={th} label="Pending Commission" value={money(unpaid.reduce((s,l)=>s+(l.inv||0),0))} color={C.yellow} icon="pay"/>
+        <Stat th={th} label="Unpaid Loads" value={unpaid.length} color={C.yellow} icon="box"/>
+        <Stat th={th} label="Net (Paid)" value={money(totalNet)} color={C.green} icon="dollar" sub="After payment fees"/>
+        <Stat th={th} label="Employee Comm" value={money(totalEmpComm)} color={C.yellow} icon="users"/>
+        <Stat th={th} label="Owner Profit" value={money(totalNet-totalEmpComm)} color={C.purple} icon="dollar"/>
       </div>
       <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
         <div style={{fontWeight:600,marginBottom:12}}>Driver Performance</div>
         <div style={{overflowX:"auto"}}>
           <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-            <thead><tr>{["Driver","Loads","Total RC","Commission","Paid Comm"].map(h=><th key={h} style={{textAlign:"left",padding:"8px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+            <thead><tr>{["Driver","Loads","Invoice","Net (all)","Net (paid)"].map(h=><th key={h} style={{textAlign:"left",padding:"8px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
             <tbody>{rows.map(d=>(
               <tr key={d.n} style={{borderBottom:"1px solid "+th.bd}}>
                 <td style={{padding:"9px 11px",fontWeight:700}}>{d.n}</td>
                 <td style={{padding:"9px 11px",textAlign:"center"}}>{d.loads}</td>
-                <td style={{padding:"9px 11px",fontWeight:600}}>{money(d.rc)}</td>
-                <td style={{padding:"9px 11px",fontWeight:600}}>{money(d.comm)}</td>
+                <td style={{padding:"9px 11px",fontWeight:600}}>{money(d.inv)}</td>
+                <td style={{padding:"9px 11px",fontWeight:600}}>{money(d.net)}</td>
                 <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(d.paid)}</td>
               </tr>
             ))}</tbody>
@@ -803,21 +1051,23 @@ function ReportsPage({th}){
   );
 }
 
+//  LOAD MODAL 
 function LoadModal({data,close,th,employees,drivers,setLoads,toast}){
-  const blank={dn:"",bb:"",bk:"",rc:"",inv:"",pd:"",pl:"",dd:"",dl:"",st:"Pending",pay:"Unpaid",cm:""};
+  const blank={dn:"",bb:"",bk:"",rc:"",inv:"",factor:"3",pd:"",pl:"",dd:"",dl:"",st:"Pending",pay:"Unpaid",cm:""};
   const[f,setF]=useState(data||blank);
   const set=k=>e=>setF(p=>({...p,[k]:e.target.value}));
+  const net=((parseFloat(f.inv)||0)*(1-(parseFloat(f.factor)||3)/100));
   const save=()=>{
-    if(!f.dn||!f.inv){window.alert("Driver & Invoice required");return;}
-    if(data){setLoads(l=>l.map(x=>x.id===data.id?{...f,id:data.id}:x));toast("Updated");}
-    else{setLoads(l=>[{...f,id:gid(),pd:f.pd||new Date().toISOString().slice(0,10),rc:parseFloat(f.rc)||0,inv:parseFloat(f.inv)||0},...l]);toast("Load added");}
+    if(!f.dn||!f.inv){window.alert("Driver and Invoice required");return;}
+    if(data){setLoads(l=>l.map(x=>x.id===data.id?{...f,id:data.id,rc:parseFloat(f.rc)||0,inv:parseFloat(f.inv)||0,factor:parseFloat(f.factor)||3}:x));toast("Updated");}
+    else{setLoads(l=>[{...f,id:gid(),pd:f.pd||new Date().toISOString().slice(0,10),rc:parseFloat(f.rc)||0,inv:parseFloat(f.inv)||0,factor:parseFloat(f.factor)||3},...l]);toast("Load added");}
     close();
   };
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"9px 12px",fontSize:13,width:"100%",marginBottom:9};
   const lb=t=><label style={{fontSize:10,color:th.muted,fontWeight:500,display:"block",marginBottom:3}}>{t}</label>;
-  return (
+  return(
     <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.75)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:14}} onClick={e=>e.target===e.currentTarget&&close()}>
-      <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:18,padding:22,width:"100%",maxWidth:500,maxHeight:"92vh",overflowY:"auto"}}>
+      <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:18,padding:22,width:"100%",maxWidth:520,maxHeight:"92vh",overflowY:"auto"}}>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
           <div style={{fontWeight:700,fontSize:16}}>{data?"Edit Load":"New Load"}</div>
           <button onClick={close} style={{background:"none",border:"none",cursor:"pointer"}}><Icon name="close" size={19} color={th.muted}/></button>
@@ -825,9 +1075,18 @@ function LoadModal({data,close,th,employees,drivers,setLoads,toast}){
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"0 11px"}}>
           <div style={{gridColumn:"1 / -1"}}>{lb("Driver *")}<select style={inp} value={f.dn} onChange={set("dn")}><option value="">Select Driver</option>{drivers.map(d=><option key={d.name}>{d.name}</option>)}</select></div>
           <div>{lb("Booked By")}<select style={inp} value={f.bb} onChange={set("bb")}><option value="">-</option>{employees.map(d=><option key={d.id}>{d.name}</option>)}</select></div>
-          <div>{lb("Broker")}<input style={inp} placeholder="Broker" value={f.bk} onChange={set("bk")}/></div>
-          <div>{lb("RC Amount ($)")}<input style={inp} type="number" value={f.rc} onChange={set("rc")}/></div>
-          <div>{lb("Invoice Amount ($) *")}<input style={inp} type="number" value={f.inv} onChange={set("inv")}/></div>
+          <div style={{gridColumn:"1 / -1"}}>{lb("Broker")}<input style={inp} placeholder="Broker name" value={f.bk} onChange={set("bk")}/></div>
+          <div>{lb("RC Amount ($) - Driver ref")}<input style={inp} type="number" value={f.rc} onChange={set("rc")} placeholder="1000"/></div>
+          <div>{lb("Invoice Amount ($) *")}<input style={inp} type="number" value={f.inv} onChange={set("inv")} placeholder="200"/></div>
+          <div>
+            {lb("Payment Fee % (Square/Stripe)")}
+            <input style={inp} type="number" value={f.factor} onChange={set("factor")} placeholder="3"/>
+          </div>
+          <div style={{padding:"10px 0"}}>
+            <div style={{fontSize:10,color:th.muted,marginBottom:3}}>Net Amount (commission base)</div>
+            <div style={{fontSize:16,fontWeight:700,color:C.green}}>{money(net)}</div>
+            <div style={{fontSize:10,color:th.muted}}>= Invoice minus {f.factor||3}% fee</div>
+          </div>
           <div>{lb("Pickup Date")}<input style={inp} type="date" value={f.pd} onChange={set("pd")}/></div>
           <div>{lb("Delivery Date")}<input style={inp} type="date" value={f.dd} onChange={set("dd")}/></div>
           <div style={{gridColumn:"1 / -1"}}>{lb("Pickup Location")}<input style={inp} placeholder="City, State" value={f.pl} onChange={set("pl")}/></div>
@@ -845,47 +1104,51 @@ function LoadModal({data,close,th,employees,drivers,setLoads,toast}){
   );
 }
 
+//  APP SHELL 
 export default function App(){
-  const[dark,setDark]=useLocal("rm2_dark",true);
-  const[user,setUser]=useLocal("rm2_user",null);
+  const[dark,setDark]=useLocal("rm3_dark",true);
+  const[user,setUser]=useLocal("rm3_user",null);
   const[page,setPage]=useState("dashboard");
   const[sb,setSb]=useState(false);
-  const[loads,setLoads]=useLS("rm2_loads",[]);
-  const[employees,setEmployees]=useLS("rm2_emp",DEFAULT_EMPLOYEES);
-  const[drivers,setDrivers]=useLS("rm2_drivers",DEFAULT_DRIVERS);
+  const[loads,setLoads]=useLS("rm3_loads",[]);
+  const[employees,setEmployees]=useLS("rm3_emp",DEFAULT_EMPLOYEES);
+  const[drivers,setDrivers]=useLS("rm3_drivers",DEFAULT_DRIVERS);
   const[toastMsg,setToastMsg]=useState(null);
   const[modal,setModal]=useState(null);
   const th=dark?{bg:C.bg.d,surf:C.surf.d,s2:C.s2.d,bd:C.bd.d,text:C.text.d,muted:C.muted.d}:{bg:C.bg.l,surf:C.surf.l,s2:C.s2.l,bd:C.bd.l,text:C.text.l,muted:C.muted.l};
   const toast=m=>{setToastMsg(m);setTimeout(()=>setToastMsg(null),2500);};
-  if(!user)return <Login th={th} onLogin={setUser}/>;
-  const NAV=[["dashboard","Home","home"],["june","June 2026","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["reports","Reports","chart"],["settings","Settings","gear"]];
-  const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,toast,setModal};
+
+  if(!user)return<Login th={th} onLogin={setUser} employees={employees}/>;
+
+  // Employee portal - restricted view
+  if(user.role==="Employee"){
+    return(
+      <div>
+        <EmployeePortal th={th} user={user} employees={employees} drivers={drivers} loads={loads} setLoads={setLoads} toast={toast}/>
+        <div style={{position:"fixed",top:10,right:10,zIndex:999}}>
+          <button onClick={()=>setDark(d=>!d)} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:8,padding:"6px 10px",cursor:"pointer",marginRight:6}}><Icon name={dark?"sun":"moon"} size={15} color={th.muted}/></button>
+          <button onClick={()=>setUser(null)} style={{background:C.red+"22",border:"none",borderRadius:8,padding:"6px 10px",cursor:"pointer",color:C.red,fontSize:12,fontWeight:600}}>Sign Out</button>
+        </div>
+        {toastMsg&&<div style={{position:"fixed",bottom:20,left:"50%",transform:"translateX(-50%)",background:C.green,color:"#fff",padding:"10px 20px",borderRadius:11,fontWeight:600,fontSize:13,zIndex:999}}>{toastMsg}</div>}
+      </div>
+    );
+  }
+
+  // Admin / Owner full portal
+  const isAdmin=user.role==="Admin"||user.role==="Owner";
+  const NAV=[["dashboard","Home","home"],["june","June 2026","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["reports","Reports","chart"]];
+  const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,toast,setModal,user};
   let body;
   if(page==="dashboard")body=<Dashboard {...cp} setPage={setPage}/>;
   else if(page==="june")body=<JunePage {...cp}/>;
   else if(page==="loads")body=<LoadsPage {...cp}/>;
   else if(page==="employees")body=<EmployeesPage {...cp}/>;
   else if(page==="payroll")body=<PayrollPage {...cp}/>;
-  else if(page==="reports")body=<ReportsPage th={th}/>;
-  else body=(
-    <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:24}}>
-      <div style={{fontWeight:700,fontSize:16,marginBottom:16}}>Settings</div>
-      {user.role!=="Owner"?<div style={{color:th.muted}}>Owner access only.</div>:(
-        <div>
-          <div style={{fontWeight:600,marginBottom:12}}>User Roles (Demo)</div>
-          {[["Ali Bhai","owner@routemate.com","Owner"],["Raza","dispatcher@routemate.com","Dispatcher"],["Viewer","viewer@routemate.com","Viewer"]].map(u=>(
-            <div key={u[1]} style={{display:"flex",alignItems:"center",gap:11,padding:"11px 0",borderBottom:"1px solid "+th.bd}}>
-              <div style={{width:32,height:32,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:13}}>{u[0].charAt(0)}</div>
-              <div style={{flex:1}}><div style={{fontWeight:600,fontSize:13}}>{u[0]}</div><div style={{fontSize:11,color:th.muted}}>{u[1]}</div></div>
-              <Badge color={u[2]==="Owner"?"purple":u[2]==="Dispatcher"?"blue":"gray"}>{u[2]}</Badge>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  else body=<ReportsPage th={th} employees={employees}/>;
+
   const mob=typeof window!=="undefined"&&window.innerWidth<768;
-  return (
+
+  return(
     <div style={{minHeight:"100vh",background:th.bg,color:th.text,fontFamily:"-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif",display:"flex"}}>
       <aside style={{width:210,minHeight:"100vh",background:th.surf,borderRight:"1px solid "+th.bd,display:"flex",flexDirection:"column",position:"fixed",left:0,top:0,bottom:0,zIndex:100,transform:(sb||!mob)?"translateX(0)":"translateX(-100%)",transition:"transform .25s ease"}}>
         <div style={{padding:"18px 14px 13px",borderBottom:"1px solid "+th.bd}}>
@@ -904,7 +1167,7 @@ export default function App(){
         </nav>
         <div style={{padding:"9px 7px 16px",borderTop:"1px solid "+th.bd}}>
           <div style={{display:"flex",alignItems:"center",gap:7,padding:"6px 10px",marginBottom:5}}>
-            <div style={{width:26,height:26,borderRadius:"50%",background:C.accent+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:C.accent}}>{(user.name||"U").charAt(0)}</div>
+            <div style={{width:26,height:26,borderRadius:"50%",background:C.accent+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:C.accent}}>{(user.name||"A").charAt(0)}</div>
             <div><div style={{fontSize:11,fontWeight:600}}>{user.name}</div><div style={{fontSize:9,color:th.muted}}>{user.role}</div></div>
           </div>
           <button onClick={()=>setDark(d=>!d)} style={{width:"100%",display:"flex",alignItems:"center",gap:9,padding:"7px 10px",borderRadius:8,border:"none",cursor:"pointer",background:"transparent",color:th.muted,fontSize:11,marginBottom:3}}><Icon name={dark?"sun":"moon"} size={14} color={th.muted}/>{dark?"Light Mode":"Dark Mode"}</button>
