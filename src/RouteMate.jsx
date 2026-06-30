@@ -137,6 +137,7 @@ function gid(){return Math.random().toString(36).slice(2,9);}
 function money(n){return"$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fdate(d){if(!d)return"-";try{return new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}catch{return d;}}
 function netInv(load){const f=parseFloat(load.factor)||3;return(parseFloat(load.inv)||0)*(1-f/100);}
+function mergeJune(overrides){return JUNE_LOADS.map(l=>overrides&&overrides[l.id]?{...l,...overrides[l.id]}:l);}
 
 function calcCommission(emp,paidLoads){
   if(!emp||emp.role==="Owner")return 0;
@@ -257,14 +258,15 @@ function Login({th,onLogin,employees}){
   );
 }
 
-function EmployeePortal({th,user,employees,drivers,loads,setLoads,toast}){
+function EmployeePortal({th,user,employees,drivers,loads,setLoads,juneOverrides,toast}){
   const emp=employees.find(e=>e.id===user.empId);
   const[page,setPage]=useState("myloads");
   const[modal,setModal]=useState(null);
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 12px",fontSize:13};
   if(!emp)return <div style={{padding:40,color:th.muted}}>Employee not found.</div>;
+  const juneMerged=mergeJune(juneOverrides);
   const myDriverNames=emp.assignedDrivers||[];
-  const allLoads=[...loads,...JUNE_LOADS];
+  const allLoads=[...loads,...juneMerged];
   const myLoads=allLoads.filter(l=>myDriverNames.some(d=>l.dn&&l.dn.toLowerCase().includes(d.toLowerCase()))||l.bb===emp.name||(l.bb&&l.bb.toLowerCase().split(" ")[0]===emp.name.toLowerCase().split(" ")[0]));
   const paidMyLoads=myLoads.filter(l=>l.pay==="Paid");
   const myComm=calcCommission(emp,paidMyLoads);
@@ -392,8 +394,9 @@ function EmpLoadModal({emp,drivers,th,close,setLoads,toast,inp}){
   );
 }
 
-function Dashboard({th,loads,employees,setPage}){
-  const allLoads=[...loads,...JUNE_LOADS];
+function Dashboard({th,loads,employees,juneOverrides,setPage}){
+  const juneMerged=mergeJune(juneOverrides);
+  const allLoads=[...loads,...juneMerged];
   const paidLoads=allLoads.filter(l=>l.pay==="Paid");
   const unpaidLoads=allLoads.filter(l=>l.pay==="Unpaid");
   const totalInv=allLoads.reduce((s,l)=>s+(l.inv||0),0);
@@ -465,8 +468,9 @@ function Dashboard({th,loads,employees,setPage}){
   );
 }
 
-function OwnerRevenuePage({th,loads,employees}){
-  const allLoads=[...loads,...JUNE_LOADS];
+function OwnerRevenuePage({th,loads,employees,juneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
+  const allLoads=[...loads,...juneMerged];
   const paidLoads=allLoads.filter(l=>l.pay==="Paid");
   const totalNetPaid=paidLoads.reduce((s,l)=>s+netInv(l),0);
   const totalEmpComm=employees.filter(e=>e.role!=="Owner").reduce((s,e)=>s+calcCommission(e,paidLoads),0);
@@ -575,19 +579,21 @@ function OwnerRevenuePage({th,loads,employees}){
   );
 }
 
-function JunePage({th,drivers,setDrivers,employees,setEmployees}){
+function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,setJuneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
+  const updateJune=(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}));
   const[view,setView]=useState("summary");
   const[selDrv,setSelDrv]=useState(null);
   const[search,setSearch]=useState("");
   const[payF,setPayF]=useState("All");
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 12px",fontSize:13};
   const stats=useMemo(()=>drivers.map(d=>{
-    const ld=JUNE_LOADS.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
+    const ld=juneMerged.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
     const pL=ld.filter(l=>l.pay==="Paid"),uL=ld.filter(l=>l.pay==="Unpaid");
     return{...d,ld,pL,uL,pRC:pL.reduce((s,l)=>s+(l.rc||0),0),uRC:uL.reduce((s,l)=>s+(l.rc||0),0),pNet:pL.reduce((s,l)=>s+netInv(l),0),uNet:uL.reduce((s,l)=>s+netInv(l),0),pInv:pL.reduce((s,l)=>s+(l.inv||0),0),uInv:uL.reduce((s,l)=>s+(l.inv||0),0)};
   }),[drivers]);
   const fLoads=useMemo(()=>{
-    let l=JUNE_LOADS.slice();
+    let l=juneMerged.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(payF!=="All")l=l.filter(x=>x.pay===payF);
     return l;
@@ -640,7 +646,7 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   if(view==="rates")return(
     <div>
       <button onClick={()=>setView("summary")} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
-      <RateEditor th={th} drivers={drivers} setDrivers={setDrivers} employees={employees} setEmployees={setEmployees} inp={inp}/>
+      <RateEditor th={th} drivers={drivers} setDrivers={setDrivers} employees={employees} setEmployees={setEmployees} inp={inp} juneOverrides={juneOverrides}/>
     </div>
   );
 
@@ -649,14 +655,14 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:10}}>
-        <h2 style={{margin:0,fontSize:19,fontWeight:700}}>June 2026 <span style={{fontSize:12,color:th.muted,fontWeight:400}}>({JUNE_LOADS.length} loads)</span></h2>
+        <h2 style={{margin:0,fontSize:19,fontWeight:700}}>June 2026 <span style={{fontSize:12,color:th.muted,fontWeight:400}}>({juneMerged.length} loads)</span></h2>
         <button onClick={()=>setView("rates")} style={{background:C.accent+"22",border:"1px solid "+C.accent+"44",borderRadius:10,padding:"8px 14px",fontSize:13,fontWeight:600,cursor:"pointer",color:C.accent,display:"flex",alignItems:"center",gap:6}}>
           <Icon name="gear" size={14} color={C.accent}/>Rate Editor
         </button>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
-        <Stat th={th} label="Paid Loads" value={JUNE_LOADS.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
-        <Stat th={th} label="Unpaid Loads" value={JUNE_LOADS.filter(l=>l.pay==="Unpaid").length} color={C.yellow} icon="box"/>
+        <Stat th={th} label="Paid Loads" value={juneMerged.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
+        <Stat th={th} label="Unpaid Loads" value={juneMerged.filter(l=>l.pay==="Unpaid").length} color={C.yellow} icon="box"/>
         <Stat th={th} label="Invoice (Paid)" value={money(gPInv)} color={C.green} icon="dollar"/>
         <Stat th={th} label="Net (Paid)" value={money(gPNet)} color={C.green} icon="pay" sub="After fees"/>
         <Stat th={th} label="Invoice (Unpaid)" value={money(gUInv)} color={C.yellow} icon="dollar"/>
@@ -730,7 +736,8 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees}){
   );
 }
 
-function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
+function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp,juneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
   const[tab,setTab]=useState("drivers");
   const[nd,setNd]=useState({name:"",rate:"",note:""});
   const[showD,setShowD]=useState(false);
@@ -750,7 +757,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
               <thead><tr style={{background:th.s2}}>{["#","Driver","Rate%","Notes","Paid","Net Paid",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
               <tbody>{drivers.map((d,i)=>{
-                const ld=JUNE_LOADS.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase())&&l.pay==="Paid");
+                const ld=juneMerged.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase())&&l.pay==="Paid");
                 const net=ld.reduce((s,l)=>s+netInv(l),0);
                 return(
                   <tr key={i} style={{borderBottom:"1px solid "+th.bd,background:i%2===0?th.surf:th.s2}}>
@@ -790,7 +797,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
               <thead><tr style={{background:th.s2}}>{["#","Name","Role","Pass","Rate%","Threshold","Assigned Drivers","Jun Comm",""].map(h=><th key={h} style={{textAlign:"left",padding:"9px 11px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
               <tbody>{employees.map((d,i)=>{
-                const paidL=JUNE_LOADS.filter(l=>l.pay==="Paid");
+                const paidL=juneMerged.filter(l=>l.pay==="Paid");
                 const comm=calcCommission(d,paidL);
                 const ed=editE===d.id;
                 return(
@@ -865,12 +872,14 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
   );
 }
 
-function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
+function LoadsPage({th,loads,setLoads,employees,drivers,juneOverrides,setJuneOverrides,setModal,toast}){
+  const juneMerged=mergeJune(juneOverrides);
+  const updateJune=(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}));
   const[search,setSearch]=useState("");
   const[sf,setSf]=useState("All");
   const[pf,setPf]=useState("All");
   const filtered=useMemo(()=>{
-    const all=[...loads,...JUNE_LOADS];
+    const all=[...loads,...juneMerged];
     let l=all.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(sf!=="All")l=l.filter(x=>x.st===sf);
@@ -881,6 +890,7 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
   const sel={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 11px",fontSize:12};
+  const[juneModal,setJuneModal]=useState(null);
   return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:9}}>
@@ -899,15 +909,22 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
         <div style={{display:"flex",flexDirection:"column",gap:9}}>
           {filtered.map(l=>{
             const isJ=l.id.charAt(0)==="j";
-            return <LoadCard key={l.id} l={l} th={th} isJune={isJ} onEdit={()=>!isJ&&setModal({type:"load",data:l})} onDup={()=>dup(l)} onDel={()=>!isJ&&del(l.id)} onTog={()=>!isJ&&tog(l.id)}/>;
+            return <LoadCard key={l.id} l={l} th={th} isJune={isJ}
+              onEdit={()=>!isJ&&setModal({type:"load",data:l})}
+              onDup={()=>dup(l)}
+              onDel={()=>!isJ&&del(l.id)}
+              onTog={()=>!isJ&&tog(l.id)}
+              onJuneEdit={isJ?(action)=>{if(action==="toggle"){updateJune(l.id,{pay:l.pay==="Paid"?"Unpaid":"Paid"});}else{setJuneModal(l);}}:null}
+            />;
           })}
         </div>
       )}
+      {juneModal&&<JuneLoadModal load={juneModal} close={()=>setJuneModal(null)} th={th} updateJune={updateJune} toast={toast}/>}
     </div>
   );
 }
 
-function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
+function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog,onJuneEdit}){
   const[ex,setEx]=useState(false);
   const net=netInv(l);
   return(
@@ -939,8 +956,10 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
           {l.cm&&<div style={{background:th.s2,borderRadius:8,padding:"7px 11px",fontSize:11,marginBottom:10,color:th.muted}}>{l.cm}</div>}
           <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
             {!isJune&&<button onClick={onEdit} style={{background:C.accent+"22",color:C.accent,border:"none",borderRadius:8,padding:"6px 11px",fontSize:11,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:4}}><Icon name="edit" size={12} color={C.accent}/>Edit</button>}
+            {isJune&&onJuneEdit&&<button onClick={onJuneEdit} style={{background:C.accent+"22",color:C.accent,border:"none",borderRadius:8,padding:"6px 11px",fontSize:11,fontWeight:600,cursor:"pointer",display:"flex",alignItems:"center",gap:4}}><Icon name="edit" size={12} color={C.accent}/>Edit</button>}
             <button onClick={onDup} style={{background:th.s2,color:th.text,border:"1px solid "+th.bd,borderRadius:8,padding:"6px 11px",fontSize:11,cursor:"pointer",display:"flex",alignItems:"center",gap:4}}><Icon name="copy" size={12} color={th.muted}/>Dup</button>
             {!isJune&&<button onClick={onTog} style={{background:(l.pay==="Paid"?C.yellow:C.green)+"22",color:l.pay==="Paid"?C.yellow:C.green,border:"none",borderRadius:8,padding:"6px 11px",fontSize:11,fontWeight:600,cursor:"pointer"}}>{l.pay==="Paid"?"Mark Unpaid":"Mark Paid"}</button>}
+            {isJune&&<button onClick={()=>onJuneEdit&&onJuneEdit("toggle")} style={{background:(l.pay==="Paid"?C.yellow:C.green)+"22",color:l.pay==="Paid"?C.yellow:C.green,border:"none",borderRadius:8,padding:"6px 11px",fontSize:11,fontWeight:600,cursor:"pointer"}}>{l.pay==="Paid"?"Mark Unpaid":"Mark Paid"}</button>}
             {!isJune&&<button onClick={onDel} style={{background:C.red+"22",color:C.red,border:"none",borderRadius:8,padding:"6px 11px",fontSize:11,cursor:"pointer",display:"flex",alignItems:"center",gap:4}}><Icon name="trash" size={12} color={C.red}/>Del</button>}
           </div>
         </div>
@@ -949,14 +968,15 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog}){
   );
 }
 
-function EmployeesPage({th,employees}){
+function EmployeesPage({th,employees,juneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
   const[sel,setSel]=useState(null);
   if(sel){
     const d=employees.find(x=>x.id===sel);
     if(!d)return null;
-    const paidLoads=JUNE_LOADS.filter(l=>l.pay==="Paid");
+    const paidLoads=juneMerged.filter(l=>l.pay==="Paid");
     const comm=calcCommission(d,paidLoads);
-    const myLoads=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+    const myLoads=juneMerged.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
     return(
       <div>
         <button onClick={()=>setSel(null)} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
@@ -1011,9 +1031,9 @@ function EmployeesPage({th,employees}){
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(230px,1fr))",gap:11}}>
         {employees.map(d=>{
-          const paidLoads=JUNE_LOADS.filter(l=>l.pay==="Paid");
+          const paidLoads=juneMerged.filter(l=>l.pay==="Paid");
           const comm=calcCommission(d,paidLoads);
-          const myLoads=JUNE_LOADS.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+          const myLoads=juneMerged.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
           return(
             <div key={d.id} onClick={()=>setSel(d.id)} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:16,cursor:"pointer"}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:11}}>
@@ -1040,10 +1060,11 @@ function EmployeesPage({th,employees}){
   );
 }
 
-function PayrollPage({th,employees}){
+function PayrollPage({th,employees,juneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
   const[month,setMonth]=useState("2026-06");
   const isJune=month==="2026-06";
-  const paidLoads=isJune?JUNE_LOADS.filter(l=>l.pay==="Paid"):[];
+  const paidLoads=isJune?juneMerged.filter(l=>l.pay==="Paid"):[];
   const stats=employees.map(d=>{
     const comm=calcCommission(d,paidLoads);
     const myL=paidLoads.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
@@ -1079,6 +1100,44 @@ function PayrollPage({th,employees}){
             </tr>
           ))}</tbody>
         </table>
+      </div>
+    </div>
+  );
+}
+
+function JuneLoadModal({load,close,th,updateJune,toast}){
+  const[f,setF]=useState({st:load.st,pay:load.pay,factor:load.factor||3,inv:load.inv,cm:load.cm||""});
+  const set=k=>e=>setF(p=>({...p,[k]:e.target.value}));
+  const net=((parseFloat(f.inv)||0)*(1-(parseFloat(f.factor)||3)/100));
+  const save=()=>{
+    updateJune(load.id,{st:f.st,pay:f.pay,factor:parseFloat(f.factor)||3,inv:parseFloat(f.inv)||0,cm:f.cm});
+    toast("Load updated");close();
+  };
+  const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"9px 12px",fontSize:13,width:"100%",marginBottom:9};
+  const lb=t=><label style={{fontSize:10,color:th.muted,fontWeight:500,display:"block",marginBottom:3}}>{t}</label>;
+  return(
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.75)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:14}} onClick={e=>e.target===e.currentTarget&&close()}>
+      <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:18,padding:22,width:"100%",maxWidth:420,maxHeight:"92vh",overflowY:"auto"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+          <div>
+            <div style={{fontWeight:700,fontSize:16}}>Edit June Load</div>
+            <div style={{fontSize:12,color:th.muted}}>{load.dn} - {load.bk||"No broker"}</div>
+          </div>
+          <button onClick={close} style={{background:"none",border:"none",cursor:"pointer"}}><Icon name="close" size={19} color={th.muted}/></button>
+        </div>
+        {lb("Load Status")}<select style={inp} value={f.st} onChange={set("st")}>{STATUSES.map(s=><option key={s}>{s}</option>)}</select>
+        {lb("Pay Status")}<select style={inp} value={f.pay} onChange={set("pay")}><option>Unpaid</option><option>Paid</option></select>
+        {lb("Invoice Amount ($)")}<input style={inp} type="number" value={f.inv} onChange={set("inv")} placeholder={load.inv}/>
+        <div style={{marginBottom:9}}>
+          {lb("Payment Fee % (Square/Stripe)")}
+          <input style={inp} type="number" value={f.factor} onChange={set("factor")} placeholder="3"/>
+          <div style={{fontSize:11,color:C.green,marginTop:4,fontWeight:600}}>Net: {money(net)} (after {f.factor||3}% fee)</div>
+        </div>
+        {lb("Comments")}<textarea style={{...inp,height:64,resize:"vertical"}} value={f.cm} onChange={set("cm")}/>
+        <div style={{display:"flex",gap:9,marginTop:4}}>
+          <button onClick={save} style={{flex:1,background:C.accent,color:"#fff",border:"none",borderRadius:11,padding:"12px",fontSize:14,fontWeight:600,cursor:"pointer"}}>Save Changes</button>
+          <button onClick={close} style={{background:th.s2,color:th.text,border:"1px solid "+th.bd,borderRadius:11,padding:"12px 16px",fontSize:14,cursor:"pointer"}}>Cancel</button>
+        </div>
       </div>
     </div>
   );
@@ -1141,6 +1200,7 @@ export default function App(){
   const[loads,setLoads]=useLS("rm4_loads",[]);
   const[employees,setEmployees]=useLS("rm4_emp",DEFAULT_EMPLOYEES);
   const[drivers,setDrivers]=useLS("rm4_drivers",DEFAULT_DRIVERS);
+  const[juneOverrides,setJuneOverrides]=useLS("rm4_june_overrides",{});
   const[toastMsg,setToastMsg]=useState(null);
   const[modal,setModal]=useState(null);
   const th=dark?{bg:C.bg.d,surf:C.surf.d,s2:C.s2.d,bd:C.bd.d,text:C.text.d,muted:C.muted.d}:{bg:C.bg.l,surf:C.surf.l,s2:C.s2.l,bd:C.bd.l,text:C.text.l,muted:C.muted.l};
@@ -1149,7 +1209,7 @@ export default function App(){
   if(user.role==="Employee"){
     return(
       <div>
-        <EmployeePortal th={th} user={user} employees={employees} drivers={drivers} loads={loads} setLoads={setLoads} toast={toast}/>
+        <EmployeePortal th={th} user={user} employees={employees} drivers={drivers} loads={loads} setLoads={setLoads} juneOverrides={juneOverrides} toast={toast}/>
         <div style={{position:"fixed",top:10,right:10,zIndex:999,display:"flex",gap:6}}>
           <button onClick={()=>setDark(d=>!d)} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:8,padding:"6px 10px",cursor:"pointer"}}><Icon name={dark?"sun":"moon"} size={15} color={th.muted}/></button>
           <button onClick={()=>setUser(null)} style={{background:C.red+"22",border:"none",borderRadius:8,padding:"6px 10px",cursor:"pointer",color:C.red,fontSize:12,fontWeight:600}}>Sign Out</button>
@@ -1159,15 +1219,15 @@ export default function App(){
     );
   }
   const NAV=[["dashboard","Home","home"],["june","June 2026","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["owner","Owner Revenue","owner"],["reports","Reports","chart"]];
-  const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,toast,setModal,user};
+  const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,juneOverrides,setJuneOverrides,toast,setModal,user};
   let body;
   if(page==="dashboard")body=<Dashboard {...cp} setPage={setPage}/>;
   else if(page==="june")body=<JunePage {...cp}/>;
   else if(page==="loads")body=<LoadsPage {...cp}/>;
-  else if(page==="employees")body=<EmployeesPage {...cp}/>;
-  else if(page==="payroll")body=<PayrollPage {...cp}/>;
-  else if(page==="owner")body=<OwnerRevenuePage {...cp}/>;
-  else body=<ReportsPage th={th} employees={employees}/>;
+  else if(page==="employees")body=<EmployeesPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
+  else if(page==="payroll")body=<PayrollPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
+  else if(page==="owner")body=<OwnerRevenuePage th={th} loads={loads} employees={employees} juneOverrides={juneOverrides}/>;
+  else body=<ReportsPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
   const mob=typeof window!=="undefined"&&window.innerWidth<768;
   return(
     <div style={{minHeight:"100vh",background:th.bg,color:th.text,fontFamily:"-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif",display:"flex"}}>
@@ -1221,18 +1281,19 @@ export default function App(){
   );
 }
 
-function ReportsPage({th,employees}){
-  const paid=JUNE_LOADS.filter(l=>l.pay==="Paid"),unpaid=JUNE_LOADS.filter(l=>l.pay==="Unpaid");
+function ReportsPage({th,employees,juneOverrides}){
+  const juneMerged=mergeJune(juneOverrides);
+  const paid=juneMerged.filter(l=>l.pay==="Paid"),unpaid=juneMerged.filter(l=>l.pay==="Unpaid");
   const totalNet=paid.reduce((s,l)=>s+netInv(l),0);
   const totalEmpComm=employees.filter(e=>e.role!=="Owner").reduce((s,e)=>s+calcCommission(e,paid),0);
   const by={};
-  JUNE_LOADS.forEach(l=>{if(!by[l.dn])by[l.dn]={n:l.dn,loads:0,inv:0,net:0,paid:0};by[l.dn].loads++;by[l.dn].inv+=l.inv||0;by[l.dn].net+=netInv(l);if(l.pay==="Paid")by[l.dn].paid+=netInv(l);});
+  juneMerged.forEach(l=>{if(!by[l.dn])by[l.dn]={n:l.dn,loads:0,inv:0,net:0,paid:0};by[l.dn].loads++;by[l.dn].inv+=l.inv||0;by[l.dn].net+=netInv(l);if(l.pay==="Paid")by[l.dn].paid+=netInv(l);});
   const rows=Object.values(by).sort((a,b)=>b.inv-a.inv);
   return(
     <div>
       <h2 style={{margin:"0 0 16px",fontSize:19,fontWeight:700}}>Reports - June 2026</h2>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(148px,1fr))",gap:10,marginBottom:18}}>
-        <Stat th={th} label="Total Loads" value={JUNE_LOADS.length} color={C.accent} icon="box"/>
+        <Stat th={th} label="Total Loads" value={juneMerged.length} color={C.accent} icon="box"/>
         <Stat th={th} label="Paid Loads" value={paid.length} color={C.green} icon="check"/>
         <Stat th={th} label="Unpaid Loads" value={unpaid.length} color={C.yellow} icon="box"/>
         <Stat th={th} label="Net (Paid)" value={money(totalNet)} color={C.green} icon="dollar" sub="After payment fees"/>
