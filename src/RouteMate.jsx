@@ -468,7 +468,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
                     <td style={{padding:"9px 11px",fontWeight:700,color:C.green,textAlign:"center"}}>{ld.length}</td>
                     <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(rc)}</td>
                     <td style={{padding:"9px 11px",fontWeight:700,color:C.green}}>{money(cm)}</td>
-                    <td style={{padding:"5px 11px"}}><button onClick={()=>{if(confirm("Remove "+d.name+"?"))setDrivers(ds=>ds.filter((_,j)=>j!==i));}} style={{background:C.red+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="trash" size={12} color={C.red}/></button></td>
+                    <td style={{padding:"5px 11px"}}><button onClick={()=>{if(window.confirm("Remove "+d.name+"?"))setDrivers(ds=>ds.filter((_,j)=>j!==i));}} style={{background:C.red+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="trash" size={12} color={C.red}/></button></td>
                   </tr>
                 );
               })}</tbody>
@@ -482,7 +482,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
                 <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Rate % *</div><input type="number" style={{...inp,width:70}} placeholder="8" value={nd.rate} onChange={e=>setNd(s=>({...s,rate:e.target.value}))}/></div>
                 <div style={{flex:1,minWidth:130}}><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Notes</div><input style={{...inp,width:"100%"}} placeholder="RC x 8%" value={nd.note} onChange={e=>setNd(s=>({...s,note:e.target.value}))}/></div>
                 <div style={{display:"flex",gap:7}}>
-                  <button onClick={()=>{if(!nd.name||!nd.rate){alert("Name & Rate required");return;}setDrivers(ds=>[...ds,{name:nd.name,rate:parseFloat(nd.rate)||0,note:nd.note||"RC x "+nd.rate+"%"}]);setNd({name:"",rate:"",note:""});setShowD(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
+                  <button onClick={()=>{if(!nd.name||!nd.rate){window.alert("Name & Rate required");return;}setDrivers(ds=>[...ds,{name:nd.name,rate:parseFloat(nd.rate)||0,note:nd.note||"RC x "+nd.rate+"%"}]);setNd({name:"",rate:"",note:""});setShowD(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
                   <button onClick={()=>setShowD(false)} style={{background:th.surf,color:th.muted,border:"1px solid "+th.bd,borderRadius:9,padding:"8px 11px",fontSize:12,cursor:"pointer"}}>Cancel</button>
                 </div>
               </div>
@@ -522,7 +522,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
                     <td style={{padding:"5px 11px"}}>
                       <div style={{display:"flex",gap:5}}>
                         {ed?<button onClick={()=>setEditE(null)} style={{background:C.green+"22",color:C.green,border:"none",borderRadius:6,padding:"4px 10px",cursor:"pointer",fontSize:11,fontWeight:600}}>Done</button>:<button onClick={()=>setEditE(d.id)} style={{background:C.accent+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="edit" size={12} color={C.accent}/></button>}
-                        <button onClick={()=>{if(confirm("Remove "+d.name+"?"))setEmployees(es=>es.filter(x=>x.id!==d.id));}} style={{background:C.red+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="trash" size={12} color={C.red}/></button>
+                        <button onClick={()=>{if(window.confirm("Remove "+d.name+"?"))setEmployees(es=>es.filter(x=>x.id!==d.id));}} style={{background:C.red+"22",border:"none",borderRadius:6,padding:"4px 7px",cursor:"pointer"}}><Icon name="trash" size={12} color={C.red}/></button>
                       </div>
                     </td>
                   </tr>
@@ -538,7 +538,7 @@ function RateEditor({th,drivers,setDrivers,employees,setEmployees,inp}){
                 <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Role</div><select style={{...inp,cursor:"pointer"}} value={ne.role} onChange={e=>setNe(s=>({...s,role:e.target.value}))}><option>Dispatcher</option><option>Sales</option><option>Manager</option></select></div>
                 <div><div style={{fontSize:10,color:th.muted,marginBottom:3}}>Rate %</div><input type="number" style={{...inp,width:70}} placeholder="10" value={ne.pct} onChange={e=>setNe(s=>({...s,pct:e.target.value}))}/></div>
                 <div style={{display:"flex",gap:7}}>
-                  <button onClick={()=>{if(!ne.name){alert("Name required");return;}setEmployees(es=>[...es,{id:gid(),name:ne.name,role:ne.role,pct:parseFloat(ne.pct)||0}]);setNe({name:"",role:"Dispatcher",pct:""});setShowE(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
+                  <button onClick={()=>{if(!ne.name){window.alert("Name required");return;}setEmployees(es=>[...es,{id:gid(),name:ne.name,role:ne.role,pct:parseFloat(ne.pct)||0}]);setNe({name:"",role:"Dispatcher",pct:""});setShowE(false);}} style={{background:C.green,color:"#fff",border:"none",borderRadius:9,padding:"8px 14px",fontSize:12,fontWeight:600,cursor:"pointer"}}>Add</button>
                   <button onClick={()=>setShowE(false)} style={{background:th.surf,color:th.muted,border:"1px solid "+th.bd,borderRadius:9,padding:"8px 11px",fontSize:12,cursor:"pointer"}}>Cancel</button>
                 </div>
               </div>
@@ -564,7 +564,7 @@ function LoadsPage({th,loads,setLoads,employees,drivers,setModal,toast}){
     if(pf!=="All")l=l.filter(x=>x.pay===pf);
     return l.sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0));
   },[loads,search,sf,pf]);
-  const del=id=>{if(confirm("Delete?")){setLoads(l=>l.filter(x=>x.id!==id));toast("Deleted");}};
+  const del=id=>{if(window.confirm("Delete?")){setLoads(l=>l.filter(x=>x.id!==id));toast("Deleted");}};
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
   const sel={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 11px",fontSize:12};
@@ -790,7 +790,7 @@ function LoadModal({data,close,th,employees,drivers,setLoads,toast}){
   const[f,setF]=useState(data||blank);
   const set=k=>e=>setF(p=>({...p,[k]:e.target.value}));
   const save=()=>{
-    if(!f.dn||!f.inv){alert("Driver & Invoice required");return;}
+    if(!f.dn||!f.inv){window.alert("Driver & Invoice required");return;}
     if(data){setLoads(l=>l.map(x=>x.id===data.id?{...f,id:data.id}:x));toast("Updated");}
     else{setLoads(l=>[{...f,id:gid(),pd:f.pd||new Date().toISOString().slice(0,10),rc:parseFloat(f.rc)||0,inv:parseFloat(f.inv)||0},...l]);toast("Load added");}
     close();
