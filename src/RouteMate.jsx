@@ -118,9 +118,8 @@ function money(n){return"$"+Number(n||0).toLocaleString("en-US",{minimumFraction
 function fdate(d){if(!d)return"-";try{return new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}catch{return d;}}
 function useLS(key,init){
   const[v,sv]=useState(init);
-  const[loaded,setLoaded]=useState(false);
   useEffect(()=>{
-    const unsub=listenData(key,(val)=>{sv(val);setLoaded(true);},init);
+    const unsub=listenData(key,(val)=>{sv(val);},init);
     return ()=>unsub&&unsub();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[key]);

@@ -6,7 +6,6 @@ import {
   doc,
   setDoc,
   onSnapshot,
-  collection,
 } from "firebase/firestore";
 
 const firebaseConfig = {
