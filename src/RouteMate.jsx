@@ -581,23 +581,26 @@ function OwnerRevenuePage({th,loads,employees,juneOverrides}){
 
 function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,setJuneOverrides}){
   const juneMerged=mergeJune(juneOverrides);
-  const updateJune=(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}));
   const[view,setView]=useState("summary");
   const[selDrv,setSelDrv]=useState(null);
   const[search,setSearch]=useState("");
   const[payF,setPayF]=useState("All");
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 12px",fontSize:13};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const stats=useMemo(()=>drivers.map(d=>{
     const ld=juneMerged.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
     const pL=ld.filter(l=>l.pay==="Paid"),uL=ld.filter(l=>l.pay==="Unpaid");
     return{...d,ld,pL,uL,pRC:pL.reduce((s,l)=>s+(l.rc||0),0),uRC:uL.reduce((s,l)=>s+(l.rc||0),0),pNet:pL.reduce((s,l)=>s+netInv(l),0),uNet:uL.reduce((s,l)=>s+netInv(l),0),pInv:pL.reduce((s,l)=>s+(l.inv||0),0),uInv:uL.reduce((s,l)=>s+(l.inv||0),0)};
-  }),[drivers]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }),[drivers,juneOverrides]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fLoads=useMemo(()=>{
     let l=juneMerged.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(payF!=="All")l=l.filter(x=>x.pay===payF);
     return l;
-  },[search,payF]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[search,payF,juneOverrides]);
 
   if(view==="driver"&&selDrv){
     const sec=stats.find(d=>d.name===selDrv);
@@ -878,6 +881,7 @@ function LoadsPage({th,loads,setLoads,employees,drivers,juneOverrides,setJuneOve
   const[search,setSearch]=useState("");
   const[sf,setSf]=useState("All");
   const[pf,setPf]=useState("All");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const filtered=useMemo(()=>{
     const all=[...loads,...juneMerged];
     let l=all.slice();
@@ -885,7 +889,8 @@ function LoadsPage({th,loads,setLoads,employees,drivers,juneOverrides,setJuneOve
     if(sf!=="All")l=l.filter(x=>x.st===sf);
     if(pf!=="All")l=l.filter(x=>x.pay===pf);
     return l.sort((a,b)=>new Date(b.pd||0)-new Date(a.pd||0));
-  },[loads,search,sf,pf]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[loads,search,sf,pf,juneOverrides]);
   const del=id=>{if(window.confirm("Delete?")){setLoads(l=>l.filter(x=>x.id!==id));toast("Deleted");}};
   const dup=ld=>{setLoads(l=>[{...ld,id:gid(),pd:new Date().toISOString().slice(0,10)},...l]);toast("Duplicated");};
   const tog=id=>setLoads(l=>l.map(x=>x.id===id?{...x,pay:x.pay==="Paid"?"Unpaid":"Paid"}:x));
@@ -1001,7 +1006,7 @@ function EmployeesPage({th,employees,juneOverrides}){
           <div style={{fontWeight:600,marginBottom:12}}>June Load History ({myLoads.length})</div>
           {myLoads.length===0?<div style={{color:th.muted,fontSize:13}}>No loads.</div>:(
             <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay","Comm"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
+              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay","Comm (if paid)"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
               <tbody>{myLoads.map(l=>{
                 const net=netInv(l);
                 const c=l.pay==="Paid"?net*(d.pct/100):0;
@@ -1050,7 +1055,8 @@ function EmployeesPage({th,employees,juneOverrides}){
               {(d.assignedDrivers||[]).length>0&&<div style={{fontSize:10,color:th.muted,marginBottom:8,lineHeight:1.4}}>{d.assignedDrivers.join(", ")}</div>}
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
                 <div><div style={{fontSize:9,color:th.muted}}>Jun Loads</div><div style={{fontWeight:700,fontSize:13}}>{myLoads.length}</div></div>
-                <div><div style={{fontSize:9,color:th.muted}}>Jun Commission</div><div style={{fontWeight:700,color:C.green,fontSize:12}}>{money(comm)}</div></div>
+                <div><div style={{fontSize:9,color:th.muted}}>Total Gross</div><div style={{fontWeight:700,color:C.accent,fontSize:12}}>{money(myLoads.reduce((s,l)=>s+(l.inv||0),0)+myLoads.filter(l=>l.pay==="Unpaid").reduce((s,l)=>s+(l.inv||0),0))}</div></div>
+                <div><div style={{fontSize:9,color:th.muted}}>Paid Comm</div><div style={{fontWeight:700,color:C.green,fontSize:12}}>{money(comm)}</div></div>
               </div>
             </div>
           );
@@ -1065,10 +1071,14 @@ function PayrollPage({th,employees,juneOverrides}){
   const[month,setMonth]=useState("2026-06");
   const isJune=month==="2026-06";
   const paidLoads=isJune?juneMerged.filter(l=>l.pay==="Paid"):[];
+  const allMonthLoads=isJune?juneMerged:[];
   const stats=employees.map(d=>{
     const comm=calcCommission(d,paidLoads);
     const myL=paidLoads.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
-    return{...d,earned:comm,loads:myL.length};
+    const allMyL=allMonthLoads.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+    const totalGross=allMyL.reduce((s,l)=>s+(l.inv||0),0);
+    const netGross=allMyL.reduce((s,l)=>s+netInv(l),0);
+    return{...d,earned:comm,loads:myL.length,totalGross,netGross};
   });
   const totalEmp=stats.filter(e=>e.role!=="Owner").reduce((s,e)=>s+e.earned,0);
   const totalNet=paidLoads.reduce((s,l)=>s+netInv(l),0);
@@ -1088,7 +1098,7 @@ function PayrollPage({th,employees,juneOverrides}){
       </div>
       <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,overflow:"hidden"}}>
         <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
-          <thead><tr style={{background:th.s2}}>{["Employee","Role","Rate","Threshold","Loads","Commission/Share"].map(h=><th key={h} style={{textAlign:"left",padding:"11px 14px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
+          <thead><tr style={{background:th.s2}}>{["Employee","Role","Rate","Threshold","Loads","Total Gross","Net Gross","Commission/Share"].map(h=><th key={h} style={{textAlign:"left",padding:"11px 14px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
           <tbody>{stats.map(e=>(
             <tr key={e.id} style={{borderBottom:"1px solid "+th.bd}}>
               <td style={{padding:"12px 14px"}}><div style={{display:"flex",alignItems:"center",gap:9}}><div style={{width:28,height:28,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:11}}>{e.name.charAt(0)}</div><span style={{fontWeight:600}}>{e.name}</span></div></td>
@@ -1096,6 +1106,8 @@ function PayrollPage({th,employees,juneOverrides}){
               <td style={{padding:"12px 14px"}}><span style={{background:"#FFFF0022",color:C.yellow,fontWeight:700,padding:"2px 8px",borderRadius:20,fontSize:11}}>{e.role==="Owner"?"50%":e.pct+"%"}</span></td>
               <td style={{padding:"12px 14px"}}>{e.threshold?<span style={{background:C.yellow+"22",color:C.yellow,fontSize:11,fontWeight:600,padding:"2px 8px",borderRadius:10}}>${e.thresholdAmt} | {e.basePct}%-{e.bonusPct}%</span>:<span style={{fontSize:11,color:th.muted}}>-</span>}</td>
               <td style={{padding:"12px 14px",fontWeight:600,textAlign:"center"}}>{e.loads}</td>
+              <td style={{padding:"12px 14px",fontWeight:600,color:C.accent}}>{money(e.totalGross||0)}</td>
+              <td style={{padding:"12px 14px",fontWeight:600,color:C.cyan}}>{money(e.netGross||0)}</td>
               <td style={{padding:"12px 14px",fontWeight:700,color:e.role==="Owner"?C.purple:C.green}}>{e.role==="Owner"?money(ownerProfit/2):money(e.earned)}</td>
             </tr>
           ))}</tbody>
