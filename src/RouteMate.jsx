@@ -982,6 +982,14 @@ function EmployeesPage({th,employees,juneOverrides}){
     const paidLoads=juneMerged.filter(l=>l.pay==="Paid");
     const comm=calcCommission(d,paidLoads);
     const myLoads=juneMerged.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+    const myPaid=myLoads.filter(l=>l.pay==="Paid");
+    const myUnpaid=myLoads.filter(l=>l.pay==="Unpaid");
+    const totalGross=myLoads.reduce((s,l)=>s+(l.inv||0),0);
+    const paidGross=myPaid.reduce((s,l)=>s+(l.inv||0),0);
+    const unpaidGross=myUnpaid.reduce((s,l)=>s+(l.inv||0),0);
+    const paidNet=myPaid.reduce((s,l)=>s+netInv(l),0);
+    const unpaidNet=myUnpaid.reduce((s,l)=>s+netInv(l),0);
+    const unpaidComm=myUnpaid.reduce((s,l)=>s+netInv(l)*(d.pct/100),0);
     return(
       <div>
         <button onClick={()=>setSel(null)} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
@@ -992,10 +1000,17 @@ function EmployeesPage({th,employees,juneOverrides}){
             <div style={{fontSize:12,color:th.muted}}>{d.role} | <span style={{color:C.yellow,fontWeight:700}}>{d.pct}%</span>{d.threshold&&<span style={{color:C.cyan}}> | Thresh: ${d.thresholdAmt} then {d.bonusPct}%</span>}</div>
           </div>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(130px,1fr))",gap:10,marginBottom:16}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
           <Stat th={th} label="Jun Loads" value={myLoads.length} color={C.accent} icon="box"/>
-          <Stat th={th} label="Paid Loads" value={myLoads.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
-          <Stat th={th} label="Commission" value={money(comm)} color={C.green} icon="dollar"/>
+          <Stat th={th} label="Paid Loads" value={myPaid.length} color={C.green} icon="check"/>
+          <Stat th={th} label="Unpaid Loads" value={myUnpaid.length} color={C.yellow} icon="box"/>
+          <Stat th={th} label="Total Gross" value={money(totalGross)} color={C.accent} icon="dollar" sub="All loads"/>
+          <Stat th={th} label="Paid Gross" value={money(paidGross)} color={C.green} icon="dollar" sub="Invoice (paid)"/>
+          <Stat th={th} label="Unpaid Gross" value={money(unpaidGross)} color={C.yellow} icon="dollar" sub="Invoice (unpaid)"/>
+          <Stat th={th} label="Net Paid" value={money(paidNet)} color={C.green} icon="pay" sub="After fees"/>
+          <Stat th={th} label="Net Unpaid" value={money(unpaidNet)} color={C.yellow} icon="pay" sub="After fees"/>
+          <Stat th={th} label="Paid Comm" value={money(comm)} color={C.green} icon="pay" sub="Earned"/>
+          <Stat th={th} label="Unpaid Comm" value={money(unpaidComm)} color={C.yellow} icon="pay" sub="Pending"/>
         </div>
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
           <div style={{fontWeight:600,marginBottom:12}}>Assigned Drivers</div>
