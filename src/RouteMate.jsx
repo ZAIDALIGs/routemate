@@ -987,7 +987,6 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog,onJuneEdit}){
 }
 
 function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoads}){
-  const juneMerged=mergeJune(juneOverrides);
   const[sel,setSel]=useState(null);
   const[editLoad,setEditLoad]=useState(null);
   const[month,setMonth]=useState("2026-06");
