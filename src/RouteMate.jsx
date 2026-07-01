@@ -1085,6 +1085,7 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
               </table>
             </div>
           )}
+        </div>
         {editLoad&&<JuneLoadModal load={editLoad} close={()=>setEditLoad(null)} th={th} updateJune={(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}))} toast={()=>{}}/>}
       </div>
     );
