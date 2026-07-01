@@ -973,9 +973,10 @@ function LoadCard({l,th,isJune,onEdit,onDup,onDel,onTog,onJuneEdit}){
   );
 }
 
-function EmployeesPage({th,employees,juneOverrides}){
+function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoads}){
   const juneMerged=mergeJune(juneOverrides);
   const[sel,setSel]=useState(null);
+  const[editLoad,setEditLoad]=useState(null);
   if(sel){
     const d=employees.find(x=>x.id===sel);
     if(!d)return null;
@@ -1020,24 +1021,51 @@ function EmployeesPage({th,employees,juneOverrides}){
           </div>
           <div style={{fontWeight:600,marginBottom:12}}>June Load History ({myLoads.length})</div>
           {myLoads.length===0?<div style={{color:th.muted,fontSize:13}}>No loads.</div>:(
-            <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay","Comm (if paid)"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd}}>{h}</th>)}</tr></thead>
-              <tbody>{myLoads.map(l=>{
-                const net=netInv(l);
-                const c=l.pay==="Paid"?net*(d.pct/100):0;
-                return(
-                  <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
-                    <td style={{padding:"8px 9px"}}>{l.dn}</td>
-                    <td style={{padding:"8px 9px",color:th.muted}}>{l.bk||"-"}</td>
-                    <td style={{padding:"8px 9px"}}>{money(l.inv)}</td>
-                    <td style={{padding:"8px 9px",color:th.muted}}>{l.factor||3}%</td>
-                    <td style={{padding:"8px 9px"}}>{money(net)}</td>
-                    <td style={{padding:"8px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
-                    <td style={{padding:"8px 9px",fontWeight:700,color:C.green}}>{l.pay==="Paid"?money(c):"-"}</td>
-                  </tr>
-                );
-              })}</tbody>
-            </table>
+            <div style={{overflowX:"auto"}}>
+              <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
+                <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Status","Pay","Comm","Actions"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+                <tbody>{myLoads.map(l=>{
+                  const net=netInv(l);
+                  const c=l.pay==="Paid"?net*(d.pct/100):0;
+                  const isJ=l.id.charAt(0)==="j";
+                  return(
+                    <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
+                      <td style={{padding:"8px 9px",fontWeight:600}}>{l.dn}</td>
+                      <td style={{padding:"8px 9px",color:th.muted}}>{l.bk||"-"}</td>
+                      <td style={{padding:"8px 9px"}}>{money(l.inv)}</td>
+                      <td style={{padding:"8px 9px",color:th.muted}}>{l.factor||3}%</td>
+                      <td style={{padding:"8px 9px",fontWeight:600,color:l.pay==="Paid"?C.green:C.yellow}}>{money(net)}</td>
+                      <td style={{padding:"5px 9px"}}>
+                        {isJ?(
+                          <select value={l.st} onChange={e=>setJuneOverrides(o=>({...o,[l.id]:{...(o[l.id]||{}),...{st:e.target.value}}}))} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer"}}>
+                            {STATUSES.map(s=><option key={s}>{s}</option>)}
+                          </select>
+                        ):(
+                          <select value={l.st} onChange={e=>setLoads(ls=>ls.map(x=>x.id===l.id?{...x,st:e.target.value}:x))} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer"}}>
+                            {STATUSES.map(s=><option key={s}>{s}</option>)}
+                          </select>
+                        )}
+                      </td>
+                      <td style={{padding:"5px 9px"}}>
+                        {isJ?(
+                          <select value={l.pay} onChange={e=>setJuneOverrides(o=>({...o,[l.id]:{...(o[l.id]||{}),...{pay:e.target.value}}}))} style={{background:l.pay==="Paid"?"#1C3A2888":"#3A2E1C88",border:"1px solid "+(l.pay==="Paid"?"#34C75966":"#FF950066"),color:l.pay==="Paid"?C.green:C.yellow,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer",fontWeight:600}}>
+                            <option>Paid</option><option>Unpaid</option>
+                          </select>
+                        ):(
+                          <select value={l.pay} onChange={e=>setLoads(ls=>ls.map(x=>x.id===l.id?{...x,pay:e.target.value}:x))} style={{background:l.pay==="Paid"?"#1C3A2888":"#3A2E1C88",border:"1px solid "+(l.pay==="Paid"?"#34C75966":"#FF950066"),color:l.pay==="Paid"?C.green:C.yellow,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer",fontWeight:600}}>
+                            <option>Paid</option><option>Unpaid</option>
+                          </select>
+                        )}
+                      </td>
+                      <td style={{padding:"8px 9px",fontWeight:700,color:C.green}}>{l.pay==="Paid"?money(c):"-"}</td>
+                      <td style={{padding:"5px 9px"}}>
+                        {isJ&&<button onClick={()=>setEditLoad(l)} style={{background:C.accent+"22",color:C.accent,border:"none",borderRadius:7,padding:"4px 9px",cursor:"pointer",fontSize:11,fontWeight:600,display:"flex",alignItems:"center",gap:4}}><Icon name="edit" size={11} color={C.accent}/>Edit</button>}
+                      </td>
+                    </tr>
+                  );
+                })}</tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>
@@ -1077,11 +1105,10 @@ function EmployeesPage({th,employees,juneOverrides}){
           );
         })}
       </div>
+      {editLoad&&<JuneLoadModal load={editLoad} close={()=>setEditLoad(null)} th={th} updateJune={(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}))} toast={()=>{}}/>}
     </div>
   );
-}
-
-function PayrollPage({th,employees,juneOverrides}){
+}({th,employees,juneOverrides}){
   const juneMerged=mergeJune(juneOverrides);
   const[month,setMonth]=useState("2026-06");
   const isJune=month==="2026-06";
@@ -1251,7 +1278,7 @@ export default function App(){
   if(page==="dashboard")body=<Dashboard {...cp} setPage={setPage}/>;
   else if(page==="june")body=<JunePage {...cp}/>;
   else if(page==="loads")body=<LoadsPage {...cp}/>;
-  else if(page==="employees")body=<EmployeesPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
+  else if(page==="employees")body=<EmployeesPage th={th} employees={employees} juneOverrides={juneOverrides} setJuneOverrides={setJuneOverrides} loads={loads} setLoads={setLoads}/>;
   else if(page==="payroll")body=<PayrollPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
   else if(page==="owner")body=<OwnerRevenuePage th={th} loads={loads} employees={employees} juneOverrides={juneOverrides}/>;
   else body=<ReportsPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
