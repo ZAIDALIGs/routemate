@@ -610,6 +610,7 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,se
     const ld=monthLoads.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
     const pL=ld.filter(l=>l.pay==="Paid"),uL=ld.filter(l=>l.pay==="Unpaid");
     return{...d,ld,pL,uL,pRC:pL.reduce((s,l)=>s+(l.rc||0),0),uRC:uL.reduce((s,l)=>s+(l.rc||0),0),pNet:pL.reduce((s,l)=>s+netInv(l),0),uNet:uL.reduce((s,l)=>s+netInv(l),0),pInv:pL.reduce((s,l)=>s+(l.inv||0),0),uInv:uL.reduce((s,l)=>s+(l.inv||0),0)};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }),[drivers,month,juneOverrides,loads]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -618,6 +619,7 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,se
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(payF!=="All")l=l.filter(x=>x.pay===payF);
     return l;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[search,payF,month,juneOverrides,loads]);
 
   if(view==="driver"&&selDrv){
@@ -701,7 +703,6 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,se
 
   const gPNet=stats.reduce((s,d)=>s+d.pNet,0),gUNet=stats.reduce((s,d)=>s+d.uNet,0);
   const gPInv=stats.reduce((s,d)=>s+d.pInv,0),gUInv=stats.reduce((s,d)=>s+d.uInv,0);
-  const monthLabel=month===new Date().toISOString().slice(0,7)?"This Month":month;
 
   return(
     <div>
