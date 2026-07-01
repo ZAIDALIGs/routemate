@@ -138,6 +138,19 @@ function money(n){return"$"+Number(n||0).toLocaleString("en-US",{minimumFraction
 function fdate(d){if(!d)return"-";try{return new Date(d).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});}catch{return d;}}
 function netInv(load){const f=parseFloat(load.factor)||3;return(parseFloat(load.inv)||0)*(1-f/100);}
 function mergeJune(overrides){return JUNE_LOADS.map(l=>overrides&&overrides[l.id]?{...l,...overrides[l.id]}:l);}
+function getMonthLoads(month,userLoads,juneOverrides){
+  // month format: "2026-06"
+  const [yr,mo]=month.split("-").map(Number);
+  const juneMerged=mergeJune(juneOverrides);
+  // June 2026 hardcoded loads
+  const juneBase=month==="2026-06"?juneMerged:[];
+  // User-added loads filtered by month
+  const userFiltered=(userLoads||[]).filter(l=>{
+    if(!l.pd)return false;
+    try{const d=new Date(l.pd);return d.getFullYear()===yr&&d.getMonth()+1===mo;}catch{return false;}
+  });
+  return [...juneBase,...userFiltered];
+}
 
 function calcCommission(emp,paidLoads){
   if(!emp||emp.role==="Owner")return 0;
@@ -977,12 +990,14 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
   const juneMerged=mergeJune(juneOverrides);
   const[sel,setSel]=useState(null);
   const[editLoad,setEditLoad]=useState(null);
+  const[month,setMonth]=useState("2026-06");
+  const monthLoads=getMonthLoads(month,loads,juneOverrides);
   if(sel){
     const d=employees.find(x=>x.id===sel);
     if(!d)return null;
-    const paidLoads=juneMerged.filter(l=>l.pay==="Paid");
+    const paidLoads=monthLoads.filter(l=>l.pay==="Paid");
     const comm=calcCommission(d,paidLoads);
-    const myLoads=juneMerged.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+    const myLoads=monthLoads.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
     const myPaid=myLoads.filter(l=>l.pay==="Paid");
     const myUnpaid=myLoads.filter(l=>l.pay==="Unpaid");
     const totalGross=myLoads.reduce((s,l)=>s+(l.inv||0),0);
@@ -994,15 +1009,18 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
     return(
       <div>
         <button onClick={()=>setSel(null)} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
-        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:18}}>
-          <div style={{width:44,height:44,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:18}}>{d.name.charAt(0)}</div>
-          <div>
-            <div style={{fontWeight:700,fontSize:17}}>{d.name}</div>
-            <div style={{fontSize:12,color:th.muted}}>{d.role} | <span style={{color:C.yellow,fontWeight:700}}>{d.pct}%</span>{d.threshold&&<span style={{color:C.cyan}}> | Thresh: ${d.thresholdAmt} then {d.bonusPct}%</span>}</div>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:10,marginBottom:18}}>
+          <div style={{display:"flex",alignItems:"center",gap:12}}>
+            <div style={{width:44,height:44,borderRadius:"50%",background:C.accent+"22",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:C.accent,fontSize:18}}>{d.name.charAt(0)}</div>
+            <div>
+              <div style={{fontWeight:700,fontSize:17}}>{d.name}</div>
+              <div style={{fontSize:12,color:th.muted}}>{d.role} | <span style={{color:C.yellow,fontWeight:700}}>{d.pct}%</span>{d.threshold&&<span style={{color:C.cyan}}> | Thresh: ${d.thresholdAmt} then {d.bonusPct}%</span>}</div>
+            </div>
           </div>
+          <input type="month" value={month} onChange={e=>setMonth(e.target.value)} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"7px 11px",fontSize:13}}/>
         </div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
-          <Stat th={th} label="Jun Loads" value={myLoads.length} color={C.accent} icon="box"/>
+          <Stat th={th} label="Loads" value={myLoads.length} color={C.accent} icon="box" sub={month}/>
           <Stat th={th} label="Paid Loads" value={myPaid.length} color={C.green} icon="check"/>
           <Stat th={th} label="Unpaid Loads" value={myUnpaid.length} color={C.yellow} icon="box"/>
           <Stat th={th} label="Total Gross" value={money(totalGross)} color={C.accent} icon="dollar" sub="All loads"/>
@@ -1019,7 +1037,7 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
             {(d.assignedDrivers||[]).map(drv=><span key={drv} style={{background:C.accent+"22",color:C.accent,padding:"4px 12px",borderRadius:20,fontSize:12,fontWeight:600}}>{drv}</span>)}
             {(d.assignedDrivers||[]).length===0&&<span style={{color:th.muted,fontSize:13}}>No drivers assigned</span>}
           </div>
-          <div style={{fontWeight:600,marginBottom:12}}>June Load History ({myLoads.length})</div>
+          <div style={{fontWeight:600,marginBottom:12}}>Load History - {month} ({myLoads.length})</div>
           {myLoads.length===0?<div style={{color:th.muted,fontSize:13}}>No loads.</div>:(
             <div style={{overflowX:"auto"}}>
               <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
@@ -1067,21 +1085,24 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
               </table>
             </div>
           )}
-        </div>
+        {editLoad&&<JuneLoadModal load={editLoad} close={()=>setEditLoad(null)} th={th} updateJune={(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}))} toast={()=>{}}/>}
       </div>
     );
   }
   return(
     <div>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:18,flexWrap:"wrap",gap:10}}>
         <h2 style={{margin:0,fontSize:19,fontWeight:700}}>Employees</h2>
-        <span style={{fontSize:11,color:th.muted}}>Edit in June 2026 - Rate Editor</span>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <span style={{fontSize:11,color:th.muted}}>Edit % in June 2026 - Rate Editor</span>
+          <input type="month" value={month} onChange={e=>setMonth(e.target.value)} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"7px 11px",fontSize:13}}/>
+        </div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(230px,1fr))",gap:11}}>
         {employees.map(d=>{
-          const paidLoads=juneMerged.filter(l=>l.pay==="Paid");
+          const paidLoads=monthLoads.filter(l=>l.pay==="Paid");
           const comm=calcCommission(d,paidLoads);
-          const myLoads=juneMerged.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
+          const myLoads=monthLoads.filter(l=>l.bb&&l.bb.toLowerCase().split(" ")[0]===d.name.toLowerCase().split(" ")[0]);
           return(
             <div key={d.id} onClick={()=>setSel(d.id)} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:16,cursor:"pointer"}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:11}}>
@@ -1097,7 +1118,7 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
               </div>
               {(d.assignedDrivers||[]).length>0&&<div style={{fontSize:10,color:th.muted,marginBottom:8,lineHeight:1.4}}>{d.assignedDrivers.join(", ")}</div>}
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:7}}>
-                <div><div style={{fontSize:9,color:th.muted}}>Jun Loads</div><div style={{fontWeight:700,fontSize:13}}>{myLoads.length}</div></div>
+                <div><div style={{fontSize:9,color:th.muted}}>{month} Loads</div><div style={{fontWeight:700,fontSize:13}}>{myLoads.length}</div></div>
                 <div><div style={{fontSize:9,color:th.muted}}>Total Gross</div><div style={{fontWeight:700,color:C.accent,fontSize:12}}>{money(myLoads.reduce((s,l)=>s+(l.inv||0),0)+myLoads.filter(l=>l.pay==="Unpaid").reduce((s,l)=>s+(l.inv||0),0))}</div></div>
                 <div><div style={{fontSize:9,color:th.muted}}>Paid Comm</div><div style={{fontWeight:700,color:C.green,fontSize:12}}>{money(comm)}</div></div>
               </div>
@@ -1105,7 +1126,6 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
           );
         })}
       </div>
-      {editLoad&&<JuneLoadModal load={editLoad} close={()=>setEditLoad(null)} th={th} updateJune={(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}))} toast={()=>{}}/>}
     </div>
   );
 }
