@@ -434,7 +434,7 @@ function Dashboard({th,loads,employees,juneOverrides,setPage}){
         <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:14,padding:18}}>
           <div style={{fontWeight:600,marginBottom:12,fontSize:14}}>Quick Actions</div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
-            {[["June 2026","cal",C.cyan,"june"],["Add Load","plus",C.accent,"loads"],["Employees","users",C.purple,"employees"],["Owner Revenue","owner",C.purple,"owner"]].map(a=>(
+            {[["Monthly Loads","cal",C.cyan,"june"],["Add Load","plus",C.accent,"loads"],["Employees","users",C.purple,"employees"],["Owner Revenue","owner",C.purple,"owner"]].map(a=>(
               <button key={a[0]} onClick={()=>setPage(a[3])} style={{background:a[2]+"18",border:"1px solid "+a[2]+"44",borderRadius:11,padding:"11px 8px",cursor:"pointer",color:a[2],fontWeight:600,fontSize:12,display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
                 <Icon name={a[1]} size={17} color={a[2]}/>{a[0]}
               </button>
@@ -592,28 +592,33 @@ function OwnerRevenuePage({th,loads,employees,juneOverrides}){
   );
 }
 
-function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,setJuneOverrides}){
-  const juneMerged=mergeJune(juneOverrides);
+function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,setJuneOverrides,loads,setLoads}){
+  const[month,setMonth]=useState("2026-06");
   const[view,setView]=useState("summary");
   const[selDrv,setSelDrv]=useState(null);
   const[search,setSearch]=useState("");
   const[payF,setPayF]=useState("All");
+  const[juneModal,setJuneModal]=useState(null);
   const inp={background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"8px 12px",fontSize:13};
+
+  const isJune=month==="2026-06";
+  const monthLoads=getMonthLoads(month,loads,juneOverrides);
+  const updateJune=(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}));
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stats=useMemo(()=>drivers.map(d=>{
-    const ld=juneMerged.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
+    const ld=monthLoads.filter(l=>l.dn&&l.dn.toLowerCase().includes(d.name.toLowerCase()));
     const pL=ld.filter(l=>l.pay==="Paid"),uL=ld.filter(l=>l.pay==="Unpaid");
     return{...d,ld,pL,uL,pRC:pL.reduce((s,l)=>s+(l.rc||0),0),uRC:uL.reduce((s,l)=>s+(l.rc||0),0),pNet:pL.reduce((s,l)=>s+netInv(l),0),uNet:uL.reduce((s,l)=>s+netInv(l),0),pInv:pL.reduce((s,l)=>s+(l.inv||0),0),uInv:uL.reduce((s,l)=>s+(l.inv||0),0)};
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }),[drivers,juneOverrides]);
+  }),[drivers,month,juneOverrides,loads]);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fLoads=useMemo(()=>{
-    let l=juneMerged.slice();
+    let l=monthLoads.slice();
     if(search)l=l.filter(x=>[x.dn,x.bk,x.bb,x.pl].some(f=>(f||"").toLowerCase().includes(search.toLowerCase())));
     if(payF!=="All")l=l.filter(x=>x.pay===payF);
     return l;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[search,payF,juneOverrides]);
+  },[search,payF,month,juneOverrides,loads]);
 
   if(view==="driver"&&selDrv){
     const sec=stats.find(d=>d.name===selDrv);
@@ -639,26 +644,54 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,se
           {sec.ld.length===0?<div style={{color:th.muted,textAlign:"center",padding:24}}>No loads.</div>:(
             <div style={{overflowX:"auto"}}>
               <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-                <thead><tr>{["Date","Broker","RC","Invoice","Fee%","Net","Status","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
-                <tbody>{sec.ld.map(l=>(
-                  <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
-                    <td style={{padding:"8px 10px",whiteSpace:"nowrap"}}>{fdate(l.pd)}</td>
-                    <td style={{padding:"8px 10px"}}>{l.bk||"-"}</td>
-                    <td style={{padding:"8px 10px"}}>{money(l.rc)}</td>
-                    <td style={{padding:"8px 10px"}}>{money(l.inv)}</td>
-                    <td style={{padding:"8px 10px",color:th.muted}}>{l.factor||3}%</td>
-                    <td style={{padding:"8px 10px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
-                    <td style={{padding:"8px 10px"}}><Badge color={sColor(l.st)}>{l.st}</Badge></td>
-                    <td style={{padding:"8px 10px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
-                  </tr>
-                ))}</tbody>
+                <thead><tr>{["Date","Broker","RC","Invoice","Fee%","Net","Status","Pay",""].map(h=><th key={h} style={{textAlign:"left",padding:"7px 10px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+                <tbody>{sec.ld.map(l=>{
+                  const isJ=l.id.charAt(0)==="j";
+                  return(
+                    <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
+                      <td style={{padding:"8px 10px",whiteSpace:"nowrap"}}>{fdate(l.pd)}</td>
+                      <td style={{padding:"8px 10px"}}>{l.bk||"-"}</td>
+                      <td style={{padding:"8px 10px"}}>{money(l.rc)}</td>
+                      <td style={{padding:"8px 10px"}}>{money(l.inv)}</td>
+                      <td style={{padding:"8px 10px",color:th.muted}}>{l.factor||3}%</td>
+                      <td style={{padding:"8px 10px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
+                      <td style={{padding:"5px 10px"}}>
+                        {isJ?(
+                          <select value={l.st} onChange={e=>updateJune(l.id,{st:e.target.value})} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer"}}>
+                            {STATUSES.map(s=><option key={s}>{s}</option>)}
+                          </select>
+                        ):(
+                          <select value={l.st} onChange={e=>setLoads(ls=>ls.map(x=>x.id===l.id?{...x,st:e.target.value}:x))} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer"}}>
+                            {STATUSES.map(s=><option key={s}>{s}</option>)}
+                          </select>
+                        )}
+                      </td>
+                      <td style={{padding:"5px 10px"}}>
+                        {isJ?(
+                          <select value={l.pay} onChange={e=>updateJune(l.id,{pay:e.target.value})} style={{background:l.pay==="Paid"?"#1C3A2888":"#3A2E1C88",border:"1px solid "+(l.pay==="Paid"?"#34C75966":"#FF950066"),color:l.pay==="Paid"?C.green:C.yellow,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer",fontWeight:600}}>
+                            <option>Paid</option><option>Unpaid</option>
+                          </select>
+                        ):(
+                          <select value={l.pay} onChange={e=>setLoads(ls=>ls.map(x=>x.id===l.id?{...x,pay:e.target.value}:x))} style={{background:l.pay==="Paid"?"#1C3A2888":"#3A2E1C88",border:"1px solid "+(l.pay==="Paid"?"#34C75966":"#FF950066"),color:l.pay==="Paid"?C.green:C.yellow,borderRadius:7,padding:"4px 7px",fontSize:11,cursor:"pointer",fontWeight:600}}>
+                            <option>Paid</option><option>Unpaid</option>
+                          </select>
+                        )}
+                      </td>
+                      <td style={{padding:"5px 10px"}}>
+                        <button onClick={()=>isJ?setJuneModal(l):setJuneModal(l)} style={{background:C.accent+"22",color:C.accent,border:"none",borderRadius:7,padding:"4px 9px",cursor:"pointer",fontSize:11,fontWeight:600,display:"flex",alignItems:"center",gap:4}}><Icon name="edit" size={11} color={C.accent}/>Edit</button>
+                      </td>
+                    </tr>
+                  );
+                })}</tbody>
               </table>
             </div>
           )}
         </div>
+        {juneModal&&<JuneLoadModal load={juneModal} close={()=>setJuneModal(null)} th={th} updateJune={updateJune} toast={()=>{}}/>}
       </div>
     );
   }
+
   if(view==="rates")return(
     <div>
       <button onClick={()=>setView("summary")} style={{background:"none",border:"none",color:C.accent,cursor:"pointer",fontSize:13,fontWeight:600,marginBottom:14}}>{"< Back"}</button>
@@ -668,86 +701,107 @@ function JunePage({th,drivers,setDrivers,employees,setEmployees,juneOverrides,se
 
   const gPNet=stats.reduce((s,d)=>s+d.pNet,0),gUNet=stats.reduce((s,d)=>s+d.uNet,0);
   const gPInv=stats.reduce((s,d)=>s+d.pInv,0),gUInv=stats.reduce((s,d)=>s+d.uInv,0);
+  const monthLabel=month===new Date().toISOString().slice(0,7)?"This Month":month;
+
   return(
     <div>
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:10}}>
-        <h2 style={{margin:0,fontSize:19,fontWeight:700}}>June 2026 <span style={{fontSize:12,color:th.muted,fontWeight:400}}>({juneMerged.length} loads)</span></h2>
+        <div style={{display:"flex",alignItems:"center",gap:12}}>
+          <h2 style={{margin:0,fontSize:19,fontWeight:700}}>Loads</h2>
+          <input type="month" value={month} onChange={e=>{setMonth(e.target.value);setView("summary");setSelDrv(null);setSearch("");}} style={{background:th.s2,border:"1px solid "+th.bd,color:th.text,borderRadius:9,padding:"7px 11px",fontSize:13}}/>
+          {isJune&&<span style={{background:"#0EA5E922",color:"#0EA5E9",fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:20}}>June 2026 - {monthLoads.length} loads</span>}
+          {!isJune&&monthLoads.length===0&&<span style={{fontSize:12,color:th.muted}}>No loads for {month} yet - add them via Loads page</span>}
+          {!isJune&&monthLoads.length>0&&<span style={{background:C.accent+"22",color:C.accent,fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:20}}>{monthLoads.length} loads</span>}
+        </div>
         <button onClick={()=>setView("rates")} style={{background:C.accent+"22",border:"1px solid "+C.accent+"44",borderRadius:10,padding:"8px 14px",fontSize:13,fontWeight:600,cursor:"pointer",color:C.accent,display:"flex",alignItems:"center",gap:6}}>
           <Icon name="gear" size={14} color={C.accent}/>Rate Editor
         </button>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
-        <Stat th={th} label="Paid Loads" value={juneMerged.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
-        <Stat th={th} label="Unpaid Loads" value={juneMerged.filter(l=>l.pay==="Unpaid").length} color={C.yellow} icon="box"/>
-        <Stat th={th} label="Invoice (Paid)" value={money(gPInv)} color={C.green} icon="dollar"/>
-        <Stat th={th} label="Net (Paid)" value={money(gPNet)} color={C.green} icon="pay" sub="After fees"/>
-        <Stat th={th} label="Invoice (Unpaid)" value={money(gUInv)} color={C.yellow} icon="dollar"/>
-        <Stat th={th} label="Net (Unpaid)" value={money(gUNet)} color={C.yellow} icon="pay"/>
-      </div>
-      <div style={{display:"flex",gap:9,marginBottom:14,flexWrap:"wrap"}}>
-        <div style={{flex:1,minWidth:170,position:"relative"}}>
-          <span style={{position:"absolute",left:9,top:"50%",transform:"translateY(-50%)"}}><Icon name="search" size={14} color={th.muted}/></span>
-          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search loads..." style={{...inp,paddingLeft:30,width:"100%"}}/>
+
+      {monthLoads.length===0&&!isJune?(
+        <div style={{background:th.surf,border:"2px dashed "+th.bd,borderRadius:14,padding:"60px 20px",textAlign:"center"}}>
+          <Icon name="cal" size={40} color={th.muted}/>
+          <div style={{fontSize:16,fontWeight:600,marginTop:12,marginBottom:8}}>No loads for {month}</div>
+          <div style={{fontSize:13,color:th.muted,marginBottom:20}}>Dispatchers can add loads via the Loads page or their employee portal.</div>
+          <div style={{fontSize:11,color:th.muted}}>June 2026 data is always available  select June 2026 above to view it.</div>
         </div>
-        <select value={payF} onChange={e=>setPayF(e.target.value)} style={{...inp,cursor:"pointer"}}><option>All</option><option>Paid</option><option>Unpaid</option></select>
-      </div>
-      {(search||payF!=="All")&&fLoads.length>0&&(
-        <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:13,padding:16,marginBottom:14}}>
-          <div style={{fontWeight:600,marginBottom:10,fontSize:13}}>Filtered ({fLoads.length})</div>
-          <div style={{overflowX:"auto"}}>
-            <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
-              <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"6px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
-              <tbody>{fLoads.map(l=>(
-                <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
-                  <td style={{padding:"7px 9px",fontWeight:600}}>{l.dn}</td>
-                  <td style={{padding:"7px 9px"}}>{l.bk||"-"}</td>
-                  <td style={{padding:"7px 9px"}}>{money(l.inv)}</td>
-                  <td style={{padding:"7px 9px",color:th.muted}}>{l.factor||3}%</td>
-                  <td style={{padding:"7px 9px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
-                  <td style={{padding:"7px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
-                </tr>
-              ))}</tbody>
-            </table>
+      ):(
+        <>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10,marginBottom:16}}>
+            <Stat th={th} label="Paid Loads" value={monthLoads.filter(l=>l.pay==="Paid").length} color={C.green} icon="check"/>
+            <Stat th={th} label="Unpaid Loads" value={monthLoads.filter(l=>l.pay==="Unpaid").length} color={C.yellow} icon="box"/>
+            <Stat th={th} label="Invoice (Paid)" value={money(gPInv)} color={C.green} icon="dollar"/>
+            <Stat th={th} label="Net (Paid)" value={money(gPNet)} color={C.green} icon="pay" sub="After fees"/>
+            <Stat th={th} label="Invoice (Unpaid)" value={money(gUInv)} color={C.yellow} icon="dollar"/>
+            <Stat th={th} label="Net (Unpaid)" value={money(gUNet)} color={C.yellow} icon="pay"/>
           </div>
-        </div>
-      )}
-      <div style={{display:"flex",flexDirection:"column",gap:10}}>
-        {stats.map(sec=>(
-          <div key={sec.name} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:13,overflow:"hidden"}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"13px 16px",cursor:"pointer"}} onClick={()=>{setSelDrv(sec.name);setView("driver");}}>
-              <div style={{flex:1}}>
-                <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:4}}>
-                  <span style={{fontWeight:700,fontSize:14}}>{sec.name}</span>
-                  <span style={{background:C.accent+"22",color:C.accent,fontSize:10,fontWeight:700,padding:"1px 7px",borderRadius:20}}>{sec.rate}%</span>
-                  {sec.pL.length>0&&<Badge color="green">{sec.pL.length} paid</Badge>}
-                  {sec.uL.length>0&&<Badge color="yellow">{sec.uL.length} unpaid</Badge>}
-                  {sec.ld.length===0&&<span style={{fontSize:11,color:th.muted}}>No loads</span>}
-                </div>
-                <div style={{fontSize:11,color:th.muted}}>{sec.note}</div>
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:12,flexShrink:0}}>
-                <div style={{textAlign:"right"}}>
-                  <div style={{fontSize:12,fontWeight:700,color:C.green}}>{money(sec.pNet)}<span style={{fontSize:9,color:th.muted,fontWeight:400}}> net</span></div>
-                  {sec.uNet>0&&<div style={{fontSize:10,color:C.yellow}}>{money(sec.uNet)} pending</div>}
-                </div>
-                <Icon name="arrow" size={15} color={th.muted}/>
+          <div style={{display:"flex",gap:9,marginBottom:14,flexWrap:"wrap"}}>
+            <div style={{flex:1,minWidth:170,position:"relative"}}>
+              <span style={{position:"absolute",left:9,top:"50%",transform:"translateY(-50%)"}}><Icon name="search" size={14} color={th.muted}/></span>
+              <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search loads..." style={{...inp,paddingLeft:30,width:"100%"}}/>
+            </div>
+            <select value={payF} onChange={e=>setPayF(e.target.value)} style={{...inp,cursor:"pointer"}}><option>All</option><option>Paid</option><option>Unpaid</option></select>
+          </div>
+          {(search||payF!=="All")&&fLoads.length>0&&(
+            <div style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:13,padding:16,marginBottom:14}}>
+              <div style={{fontWeight:600,marginBottom:10,fontSize:13}}>Filtered ({fLoads.length})</div>
+              <div style={{overflowX:"auto"}}>
+                <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
+                  <thead><tr>{["Driver","Broker","Invoice","Fee%","Net","Pay"].map(h=><th key={h} style={{textAlign:"left",padding:"6px 9px",color:th.muted,fontWeight:500,borderBottom:"1px solid "+th.bd,whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+                  <tbody>{fLoads.map(l=>(
+                    <tr key={l.id} style={{borderBottom:"1px solid "+th.bd}}>
+                      <td style={{padding:"7px 9px",fontWeight:600}}>{l.dn}</td>
+                      <td style={{padding:"7px 9px"}}>{l.bk||"-"}</td>
+                      <td style={{padding:"7px 9px"}}>{money(l.inv)}</td>
+                      <td style={{padding:"7px 9px",color:th.muted}}>{l.factor||3}%</td>
+                      <td style={{padding:"7px 9px",fontWeight:700,color:l.pay==="Paid"?C.green:C.yellow}}>{money(netInv(l))}</td>
+                      <td style={{padding:"7px 9px"}}><Badge color={l.pay==="Paid"?"green":"yellow"}>{l.pay}</Badge></td>
+                    </tr>
+                  ))}</tbody>
+                </table>
               </div>
             </div>
-            {sec.ld.length>0&&(
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",borderTop:"1px solid "+th.bd}}>
-                <div style={{padding:"9px 16px",borderRight:"1px solid "+th.bd,background:"#1E6B2E11"}}>
-                  <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>Paid</div>
-                  <div style={{fontSize:12,fontWeight:700}}>{money(sec.pInv)} inv / <span style={{color:C.green}}>{money(sec.pNet)}</span> net</div>
+          )}
+          <div style={{display:"flex",flexDirection:"column",gap:10}}>
+            {stats.filter(sec=>sec.ld.length>0||isJune).map(sec=>(
+              <div key={sec.name} style={{background:th.surf,border:"1px solid "+th.bd,borderRadius:13,overflow:"hidden"}}>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"13px 16px",cursor:"pointer"}} onClick={()=>{setSelDrv(sec.name);setView("driver");}}>
+                  <div style={{flex:1}}>
+                    <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:4}}>
+                      <span style={{fontWeight:700,fontSize:14}}>{sec.name}</span>
+                      <span style={{background:C.accent+"22",color:C.accent,fontSize:10,fontWeight:700,padding:"1px 7px",borderRadius:20}}>{sec.rate}%</span>
+                      {sec.pL.length>0&&<Badge color="green">{sec.pL.length} paid</Badge>}
+                      {sec.uL.length>0&&<Badge color="yellow">{sec.uL.length} unpaid</Badge>}
+                      {sec.ld.length===0&&<span style={{fontSize:11,color:th.muted}}>No loads</span>}
+                    </div>
+                    <div style={{fontSize:11,color:th.muted}}>{sec.note}</div>
+                  </div>
+                  <div style={{display:"flex",alignItems:"center",gap:12,flexShrink:0}}>
+                    <div style={{textAlign:"right"}}>
+                      <div style={{fontSize:12,fontWeight:700,color:C.green}}>{money(sec.pNet)}<span style={{fontSize:9,color:th.muted,fontWeight:400}}> net</span></div>
+                      {sec.uNet>0&&<div style={{fontSize:10,color:C.yellow}}>{money(sec.uNet)} pending</div>}
+                    </div>
+                    <Icon name="arrow" size={15} color={th.muted}/>
+                  </div>
                 </div>
-                <div style={{padding:"9px 16px",background:"#8B250011"}}>
-                  <div style={{fontSize:10,color:C.yellow,fontWeight:700,marginBottom:2}}>Unpaid</div>
-                  <div style={{fontSize:12,fontWeight:700}}>{money(sec.uInv)} inv / <span style={{color:C.yellow}}>{money(sec.uNet)}</span> net</div>
-                </div>
+                {sec.ld.length>0&&(
+                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",borderTop:"1px solid "+th.bd}}>
+                    <div style={{padding:"9px 16px",borderRight:"1px solid "+th.bd,background:"#1E6B2E11"}}>
+                      <div style={{fontSize:10,color:C.green,fontWeight:700,marginBottom:2}}>Paid</div>
+                      <div style={{fontSize:12,fontWeight:700}}>{money(sec.pInv)} inv / <span style={{color:C.green}}>{money(sec.pNet)}</span> net</div>
+                    </div>
+                    <div style={{padding:"9px 16px",background:"#8B250011"}}>
+                      <div style={{fontSize:10,color:C.yellow,fontWeight:700,marginBottom:2}}>Unpaid</div>
+                      <div style={{fontSize:12,fontWeight:700}}>{money(sec.uInv)} inv / <span style={{color:C.yellow}}>{money(sec.uNet)}</span> net</div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
+      {juneModal&&<JuneLoadModal load={juneModal} close={()=>setJuneModal(null)} th={th} updateJune={updateJune} toast={()=>{}}/>}
     </div>
   );
 }
@@ -1294,11 +1348,11 @@ export default function App(){
       </div>
     );
   }
-  const NAV=[["dashboard","Home","home"],["june","June 2026","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["owner","Owner Revenue","owner"],["reports","Reports","chart"]];
+  const NAV=[["dashboard","Home","home"],["june","Monthly Loads","cal"],["loads","Loads","box"],["employees","Employees","users"],["payroll","Payroll","pay"],["owner","Owner Revenue","owner"],["reports","Reports","chart"]];
   const cp={th,loads,setLoads,employees,setEmployees,drivers,setDrivers,juneOverrides,setJuneOverrides,toast,setModal,user};
   let body;
   if(page==="dashboard")body=<Dashboard {...cp} setPage={setPage}/>;
-  else if(page==="june")body=<JunePage {...cp}/>;
+  else if(page==="june")body=<JunePage {...cp} loads={loads} setLoads={setLoads}/>;
   else if(page==="loads")body=<LoadsPage {...cp}/>;
   else if(page==="employees")body=<EmployeesPage th={th} employees={employees} juneOverrides={juneOverrides} setJuneOverrides={setJuneOverrides} loads={loads} setLoads={setLoads}/>;
   else if(page==="payroll")body=<PayrollPage th={th} employees={employees} juneOverrides={juneOverrides}/>;
@@ -1318,7 +1372,7 @@ export default function App(){
           {NAV.map(n=>(
             <button key={n[0]} onClick={()=>{setPage(n[0]);setSb(false);}} style={{width:"100%",display:"flex",alignItems:"center",gap:10,padding:"9px 10px",borderRadius:9,border:"none",cursor:"pointer",marginBottom:2,background:page===n[0]?C.accent+"22":"transparent",color:page===n[0]?C.accent:th.muted,fontWeight:page===n[0]?600:400,fontSize:12}}>
               <Icon name={n[2]} size={16} color={page===n[0]?C.accent:th.muted}/>{n[1]}
-              {n[0]==="june"&&<span style={{marginLeft:"auto",background:"#0EA5E922",color:"#0EA5E9",fontSize:9,fontWeight:700,padding:"1px 5px",borderRadius:20}}>71</span>}
+              
             </button>
           ))}
         </nav>
