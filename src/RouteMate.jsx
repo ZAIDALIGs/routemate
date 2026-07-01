@@ -1108,7 +1108,9 @@ function EmployeesPage({th,employees,juneOverrides,setJuneOverrides,loads,setLoa
       {editLoad&&<JuneLoadModal load={editLoad} close={()=>setEditLoad(null)} th={th} updateJune={(id,changes)=>setJuneOverrides(o=>({...o,[id]:{...(o[id]||{}),...changes}}))} toast={()=>{}}/>}
     </div>
   );
-}({th,employees,juneOverrides}){
+}
+
+function PayrollPage({th,employees,juneOverrides}){
   const juneMerged=mergeJune(juneOverrides);
   const[month,setMonth]=useState("2026-06");
   const isJune=month==="2026-06";
